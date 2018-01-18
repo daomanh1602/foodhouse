@@ -39,11 +39,12 @@ use yii\helpers\ArrayHelper;
 		<div class="box">			
 			<!-- /.box-header -->
 			<div class="box-body">
-				<table id="example1" class="table table-bordered table-striped">
+				<table id="example1" class="table table-bordered table-striped" >
 					<thead>
 						<tr>
 							<th style="color: red; width: 10%">ID</th>
-							<th style="color: red; width: 60%">Name</th>													
+							<th style="color: red; width: 20%">Name</th>
+							<th style="color: red; width: 40%">Permission</th>																				
 							<th style="color: red; width: 30%">Action</th>							
 						</tr>
 					</thead>
@@ -51,7 +52,8 @@ use yii\helpers\ArrayHelper;
 					<?php foreach ($the_permission as $v){?>
 						<tr>
 							<td><?= $v['id']?></td>						
-							<td><?= $v['permission_name']?></td>																			
+							<td><?= $v['permission_name']?></td>	
+							<td><div style="word-wrap:break-word; "><?=   substr($v['permission_values'],0,60).' ...' ?></div></td>									
 							<td><a href="/admin/permission/u?id=<?= $v['id'];?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> | <a href="/admin/permission/d?id=<?= $v['id'];?>"><i class="fa fa-trash-o fa-2" aria-hidden="true"></i></a> </td>
 						</tr>						
 					</tbody>

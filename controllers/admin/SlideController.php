@@ -135,68 +135,6 @@ class SlideController extends MyController {
             $model->status = '1';
             $model->name = 'null';
             // var_dump($_POST);exit();
-            //upload file 
-            if (isset($_POST['fileid']) && isset($_POST['filename']) && is_array($_POST['fileid']) && is_array($_POST['filename']) &&  count($_POST['fileid']) == count($_POST['filename'])) {
-                foreach ($_POST['fileid'] as $i => $fileId) {
-                    $newFileName = $_POST['filename'][$i];
-                    $rawFileExt = strrchr($newFileName, '.');
-                    $rawFileName = $fileId.$rawFileExt;
-                    $rawFilePath = Yii::getAlias('@webroot').'/assets/plupload_2.1.9/'.$rawFileName;
-                    if (file_exists($rawFilePath)) {
-                        $fileUid = Yii::$app->security->generateRandomString(10);
-                        $fileSize = filesize($rawFilePath);
-                        $imgSize = @getimagesize($rawFilePath);
-                        if ($imgSize) {
-                            $fileImgSize = $imgSize[0].'×'.$imgSize[1];
-                        } else {
-                            $fileImgSize = '';
-                        }
-                        // Yii::$app->db->createCommand()
-                        //     ->insert('at_files', [
-                        //         'co'=>ICT,
-                        //         'cb'=>USER_ID,
-                        //         'uo'=>ICT,
-                        //         'ub'=>USER_ID,
-                        //         'name'=>$newFileName,
-                        //         'ext'=>$rawFileExt,
-                        //         'size'=>$fileSize,
-                        //         'img_size'=>$fileImgSize,
-                        //         'uid'=>$fileUid,
-                        //         'filegroup_id'=>1,
-                        //         'rtype'=>'case',
-                        //         'rid'=>$theCase['id'],
-                        //         'n_id'=>$theNote['id'],
-                        //     ])
-                        //     ->execute();
-                        $newFileId = Yii::$app->db->getLastInsertID();
-                        // New dir
-                        $newDir = Yii::getAlias('@webroot').'/upload/slide/';
-                        @mkdir($newDir);
-
-                        // New name
-                        $newName = 'file-slide'.'-'.$newFileId;
-
-                        // Move upload file to new (official) location
-                        if (copy($rawFilePath, $newDir.$newName)) {
-                            unlink($rawFilePath);
-                            // $fileList .= '<br>+ <a href="https://my.amicatravel.com/files/r/'.$newFileId.'">'.$newFileName.'</a>';
-                            //echo '<br><a href="/files/r/', $newFileId, '">', $newName, ' = ', $newFileName, '</a>';
-                        } else {
-                            exit('a');
-                        // Yii::$app->db->createCommand()
-                        //     ->delete('at_files', [
-                        //         'id'=>$newFileId,
-                        //     ])
-                        //     ->execute();
-                        }
-                    }else{
-                        var_dump($rawFilePath);exit('c');
-                    }
-                }
-            }else{
-                exit('b');
-            }
-            //
 
             $parent_id = '1';
             $model->parent_id = $parent_id;
@@ -429,6 +367,30 @@ class SlideController extends MyController {
         ] );
 // 		var_dump($id);exit();
     }
+
+    public function actionMoveup($id){
+        
+        $model = $this->findModel($id);
+        $a = $model->prev()->one();
+        if(isset($a)){
+            $model->insertBefore($a);
+        }        
+        return $this->redirect(['index']);
+        
+    }
+
+    public function actionMovedown($id){
+
+        $model = $this->findModel($id);
+        $a = $model->next()->one();
+        if(isset($a)){
+            $model->insertAfter($a);
+        }        
+        return $this->redirect(['index']);
+        
+    }
+
+
     /**
      * Finds the Slide model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

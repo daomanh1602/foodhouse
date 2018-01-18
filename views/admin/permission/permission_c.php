@@ -1,47 +1,43 @@
 <?php
-$this->title = 'Post';
-Yii::$app->params['page_small_title'] = 'Create post';
+$this->title = 'Permission';
+Yii::$app->params['page_small_title'] = 'Create Permission';
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 
-$list_parent = [];
+$list_action = [
+	'c'=>'category',
+	'p' => 'post',
+	'pe' => 'permission',
+	's' => 'slide'
+];
 
-foreach ($theCategoryHas as $t){
-	$list_parent[]= ['id'=>$t['id'],'name'=> str_repeat('--', $t['depth']). ' ' .$t['category_detail']['name']];
-}
-
+$list_val = [
+	'create' => 'create',
+	'update' => 'update',
+	'delete' => 'delete',
+	'view' => 'view',
+]
 
 ?>
 
 <div class="grid-form">
 	<div class="grid-form1">
-		<h3 id="forms-example" class="">Create Post</h3>
+		<h3 id="forms-example" class="">Create <?= $this->title ?> </h3>
 		<? $form = ActiveForm::begin();?>
+							
 			<div class="form-group">
-				<?=$form->field($thePostForm, 'cate_id')->dropDownList(ArrayHelper::map($list_parent, 'id', 'name')); ?>
+				<?=$form->field($thePermissionForm, 'name')?>
 			</div>
+			
 			<div class="form-group">
-				<?=$form->field($thePostForm, 'avatar')->fileInput(); ?>
-			</div>						
-			<div class="form-group">
-				<?=$form->field($thePostForm, 'name')?>
-			</div>
-			<div class="form-group">
-				<?=$form->field($thePostForm, 'description')->textArea(['rows'=>5])?>
-			</div>
-			<div class="form-group">
-				<?=$form->field($thePostForm, 'content')->textArea(['rows'=>20])?>
-			</div>
-			<div class="form-group">
-				<?=$form->field($thePostForm, 'tag')?>
-			</div>
-			<div class="form-group">
-				<?=$form->field($thePostForm, 'seo_title')?>
-			</div>
-			<div class="form-group">
-				<?=$form->field($thePostForm, 'seo_description')->textArea(['rows'=>5])?>
-			</div>
+				<? foreach($list_action as $action ){ ?>
+				
+					<?= $form->field($thePermissionForm, $action , ['enableClientValidation'=>false])->checkboxList($list_val, ['multiple'=>'multiple']) ?>
+				
+				<? } ?>
+			</div> 
+
 			<br/>
 			<div class="text-right"><?= Html::submitButton('submit', ['class' => 'btn btn-default']); ?></div>
 

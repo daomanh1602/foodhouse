@@ -55,7 +55,10 @@ use yii\helpers\ArrayHelper;
 						<tr>
 							<td><?= $v['id']?></td>												
 							<td><?= str_repeat('--', $v['depth']). ' ' . $v['slide_detail']['name'] ?></td>						
-							<td><?= '';?></td>						
+							<td>
+      							<a title="<?=Yii::t('app', 'move')?>" class="text-muted" href="/admin/slide/moveup?id=<?=$v['id']?>"><i class="fa fa-arrow-up "></i></a> | 
+      							<a title="<?=Yii::t('app', 'move')?>" class="text-muted" href="/admin/slide/movedown?id=<?=$v['id']?>"><i class="fa fa-arrow-down"></i></a>
+     						</td>					
 							<td><?= $v['created_at']?></td>																	
 							<td><?= $v['user_created']['username']?></td>																						
 							<td><a href="/admin/slide/u?id=<?= $v['id'];?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> | <a href="/admin/slide/d?id=<?= $v['id'];?>"><i class="fa fa-trash-o fa-2" aria-hidden="true"></i></a> </td>
