@@ -27,7 +27,7 @@ use kartik\widgets\FileInput;
 
 	<div class="form-group ">
         
-        <?= $form->field($theForm, 'avatar')->widget(FileInput::classname(), ['options' => ['accept' => 'image/*']]); ?>
+        <?= $form->field($theForm, 'avatar')->widget(FileInput::classname(), ['options' => ['accept' => 'image/*'],'pluginOptions' => ['showUpload' => false,'showCancel' => false,]]); ?>
 	</div>
 				
     <?= $form->field($theForm, 'name')->textInput(['maxlength' => true]) ?>
