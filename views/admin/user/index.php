@@ -63,7 +63,7 @@ use yii\helpers\ArrayHelper;
 					<?php }?>					
 				</table>
 			</div>
-			<? if ($pages->totalCount > $pages->pageSize) { ?>
+			<?php if($pages->totalCount > $pages->pageSize) { ?>
 			<div class="text-right" style="">
 			<?= LinkPager::widget([
 					'pagination' => $pages,
@@ -71,9 +71,9 @@ use yii\helpers\ArrayHelper;
 					'prevPageLabel'=>'<',
 					'nextPageLabel'=>'>',
 					'lastPageLabel'=>'>>',
-				]) ?>
+				]); ?>
 			</div>
-			<? } // if pages ?>
+			<?php } // if pages ?>
 			<!-- /.box-body -->
 		</div>
 		<!-- END TABLE -->
@@ -82,5 +82,3 @@ use yii\helpers\ArrayHelper;
 
 </div>
 <!--//grid-->
-
-

@@ -3,7 +3,8 @@ Yii::$app->params['page_title'] = Yii::$app->params['page_title'] == '' ? $this-
 Yii::$app->params['page_small_title'] = Yii::$app->params['page_small_title'] == '' ? '': Yii::$app->params['page_small_title'];
 Yii::$app->params['page_meta_title'] = Yii::$app->params['page_meta_title'] == '' ? Yii::$app->params['page_title'] : Yii::$app->params['page_meta_title'];
 // use yii\helpers\Html;
-app\assets\MainAsset::register($this);
+use app\assets\MainAsset;
+MainAsset::register($this);
 
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
@@ -308,7 +309,7 @@ License URL: bienngoc.com
             var lang = "vi";
             $.ajax({
                 method: "POST",
-                url: <?php echo 'a' ?>/'change_lang',
+                url: 'change_lang',
                 data: lang
             })		    		   
             return true;

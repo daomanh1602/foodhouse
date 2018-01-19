@@ -31,11 +31,11 @@ $list_val = [
 			</div>
 			
 			<div class="form-group">
-				<? foreach($list_action as $action ){ ?>
+				<?php foreach($list_action as $action ){ ?>
 				
 					<?= $form->field($thePermissionForm, $action , ['enableClientValidation'=>false])->checkboxList($list_val, ['multiple'=>'multiple']) ?>
 				
-				<? } ?>
+				<?php } ?>
 			</div> 
 
 			<br/>

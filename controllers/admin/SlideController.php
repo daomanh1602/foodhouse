@@ -55,7 +55,7 @@ class SlideController extends MyController {
         ] );
         
         $the_Slide = $query
-        ->orderBy ( 'nobi_Slide.lft' )
+        ->orderBy ( 'nobi_slide.lft' )
         ->offset ( $pages->offset )
         ->limit ( $pages->limit )
         ->with ( [
@@ -111,7 +111,7 @@ class SlideController extends MyController {
         ->where (['status' => '1']);	
         
         $the_Slide = $query
-        ->orderBy ( 'nobi_Slide.lft' )			
+        ->orderBy ( 'nobi_slide.lft' )			
         ->with ( [
             'slide_detail' => function ($query) {
                 $query->andWhere ( [
