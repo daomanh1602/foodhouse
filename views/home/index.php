@@ -72,7 +72,7 @@
                             </div>
                         </div>
                     </div> -->      
-                    <? foreach ($the_category as $cate){ ?> 
+                    <?php foreach ($the_category as $cate){ ?> 
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab">
                             <h4 class="panel-title">

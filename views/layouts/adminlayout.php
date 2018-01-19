@@ -157,8 +157,7 @@ License URL: bienngoc.com
                                 <li><a href="inbox.html"><i class="fa fa-envelope"></i>Inbox</a></li>
                                 <li><a href="calendar.html"><i class="fa fa-calendar"></i>Calender</a></li>
                                 <li><a href="inbox.html"><i class="fa fa-clipboard"></i>Tasks</a></li>
-                            </ul></li>
-
+                            </ul></li>              
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->

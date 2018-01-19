@@ -117,8 +117,6 @@ class PermissionController extends MyController {
             }
         }
 
-        // var_dump($thePermission['permission_name']);exit();
-
         $thePermissionForm['name'] = $thePermission['permission_name'];
         $thePermissionForm['category'] = $cate_list;
         $thePermissionForm['post'] = $post_list;
@@ -149,6 +147,7 @@ class PermissionController extends MyController {
                     $newMetas.= 'slide_'.$v.',';
                 }
             }
+
             $thePermission->permission_name = $thePermissionForm['name'];
             $thePermission->permission_values = $newMetas;
             $thePermission->status ='1';

@@ -4,7 +4,7 @@ use yii\widgets\ActiveForm;
 
 ?>
 <div class="col-md-12">
-	<? $form = ActiveForm::begin();?>
+	<?php $form = ActiveForm::begin();?>
 	<div class="row">
 		<div class="col-md-12">
 			<?=$form->field($model, 'username'); ?>
@@ -16,5 +16,5 @@ use yii\widgets\ActiveForm;
 		<div class="text-right"><?= Html::submitButton('Sign In'); ?></div>	
 		</div>
 	</div>
-	<? ActiveForm::end(); ?>
+	<?php ActiveForm::end(); ?>
 </div>

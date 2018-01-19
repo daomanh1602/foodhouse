@@ -6,6 +6,7 @@ return [
 	'delete' => 'Xóa',
 	'action' => 'Hành động',
 	'submit' => 'Lưu',	
+	'status' => 'Trang thai',
 	
 	'avatar' => 'Ảnh đại diện',	
 	'description' => 'Mô tả',	
@@ -19,7 +20,7 @@ return [
 	'g_name' => 'Giới tính',	
 	'a_name' => 'Địa chỉ',
 	'p_name' => 'Mật khẩu',
-		
+	'permission' => 'Quyền',
 	//Category
 	'name_category' => 'Tên danh mục',
 	'parent_id_category' => 'Danh mục cha',

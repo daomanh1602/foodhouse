@@ -16,7 +16,7 @@ foreach ($theCategoryHas as $t){
 <div class="grid-form">
 	<div class="grid-form1">
 		<h3 id="forms-example" class="">Update Post</h3>
-		<? $form = ActiveForm::begin();?>
+		<?php $form = ActiveForm::begin();?>
 			<div class="form-group">
 				<?=$form->field($thePostForm, 'cate_id')->dropDownList(ArrayHelper::map($list_parent, 'id', 'name')); ?>
 			</div>						
@@ -41,7 +41,7 @@ foreach ($theCategoryHas as $t){
 			<br/>
 			<div class="text-right"><?= Html::submitButton('submit', ['class' => 'btn btn-default']); ?></div>
 
-		<? ActiveForm::end(); ?>
+		<?php ActiveForm::end(); ?>
 	</div>
 	<!---->
 </div>

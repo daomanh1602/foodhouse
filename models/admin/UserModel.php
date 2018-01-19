@@ -48,13 +48,15 @@ class UserModel extends ActiveRecord  implements IdentityInterface
 				'address'=> Yii::t('appuser', 'a_name'),
 				'password' => Yii::t('appuser', 'p_name'),
 				'username' => Yii::t('appuser', 'u_name'),
+				'id_permission' => Yii::t('appuser', 'permission'),
+				'status_acc' => Yii::t('appuser', 'status'),
 		];
 	}
 	
 	public function rules()
 	{
 		return [
-				[['username','password,address'], 'required'],
+				[['username','password','permission_id','address'], 'required'],
 				[['emails'], 'email'],
 				[['username','emails'], 'unique'],
 				[['username','password','first_name','last_name'], 'string', 'max' => 250],				
@@ -64,8 +66,8 @@ class UserModel extends ActiveRecord  implements IdentityInterface
 	public function scenarios()
 	{
 		return [
-				'create' => ['f_name', 'l_name','username','password','emails','address','gender'],
-				'update' => ['f_name', 'l_name','emails','address','gender'],
+				'create' => ['f_name', 'l_name','username','password','emails','address','gender','id_permission','status_acc'],
+				'update' => ['f_name', 'l_name','emails','address','gender','status_acc'],
 				'change_password' => ['password'],
 				'login' => ['username','password'],
 		];

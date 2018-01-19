@@ -24,7 +24,7 @@ $list_val = [
 <div class="grid-form">
 	<div class="grid-form1">
 		<h3 id="forms-example" class="">Create <?= $this->title ?> </h3>
-		<? $form = ActiveForm::begin();?>
+		<?php $form = ActiveForm::begin();?>
 							
 			<div class="form-group">
 				<?=$form->field($thePermissionForm, 'name')?>
@@ -41,7 +41,7 @@ $list_val = [
 			<br/>
 			<div class="text-right"><?= Html::submitButton('submit', ['class' => 'btn btn-default']); ?></div>
 
-		<? ActiveForm::end(); ?>
+		<?php ActiveForm::end(); ?>
 	</div>
 	<!---->
 </div>

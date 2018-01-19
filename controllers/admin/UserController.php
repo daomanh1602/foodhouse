@@ -4,6 +4,7 @@ namespace app\controllers\admin;
 
 use Yii;
 use app\models\admin\UserModel;
+use app\models\admin\PermissionModel;
 use yii\web\HttpException;
 use yii\data\Pagination;
 
@@ -30,7 +31,13 @@ class UserController extends MyController {
     public function actionC() {
         $theUser = new UserModel ();
         $theUser->scenario = 'create';
-        
+
+        $list_permission =  $query = PermissionModel::find ()
+            ->select('id, permission_name')
+            ->where ( [ 'status' => '1' ] )
+            ->orderBy ( 'id' )           
+            ->asArray()
+            ->all ();;      
         
         if ($theUser->load ( Yii::$app->request->post () ) && $theUser->validate ()) {
             
@@ -39,12 +46,12 @@ class UserController extends MyController {
             $theUser->created_by = USER_ID;
             $theUser->updated_at = NOW;
             $theUser->updated_by = USER_ID;
-            $theUser->status_acc = 1;
-            $theUser->username = $theUser->username;
-            $theUser->f_name = $theUser->f_name;
-            $theUser->l_name = $theUser->l_name;
-            $theUser->emails = $theUser->emails;
-            $theUser->gender = $theUser->gender;
+            // $theUser->status_acc = 1;
+            // $theUser->username = $theUser->username;
+            // $theUser->f_name = $theUser->f_name;
+            // $theUser->l_name = $theUser->l_name;
+            // $theUser->emails = $theUser->emails;
+            // $theUser->gender = $theUser->gender;
             $theUser->password = md5 ( $theUser->password ) . 'n0b1';
             
             $result = $theUser->save ( false );
@@ -65,7 +72,8 @@ class UserController extends MyController {
         }
         
         return $this->render ( 'users_c', [ 
-                'theUser' => $theUser 
+                'theUser' => $theUser,
+                'list_permission' => $list_permission
         ] );
     }
     
