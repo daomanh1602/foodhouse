@@ -49,3 +49,25 @@ foreach ($theCategoryHas as $t){
 	</div>
 	<!---->
 </div>
+
+<?php
+$js = <<<'JS'
+    $('#postform-content').ckeditor({
+        allowedContent: 'p sub sup strong em s a i u ul ol li blockquote; img(*)[*]{*};',
+        entities: false,
+        entities_greek: false,
+        entities_latin: false,
+        uiColor: '#ffffff',
+        height:400,
+        contentsCss: '/assets/css/style_ckeditor.css'
+    });
+JS;
+
+$this->registerJs ( $js );
+
+$this->registerJsFile ( 'https://cdn.ckeditor.com/4.7.3/basic/ckeditor.js', [
+        'depends' => 'yii\web\JqueryAsset'
+] );
+$this->registerJsFile ( 'https://cdn.ckeditor.com/4.7.3/basic/adapters/jquery.js', [
+        'depends' => 'yii\web\JqueryAsset'
+] );
