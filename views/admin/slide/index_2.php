@@ -5,6 +5,15 @@ use yii\helpers\Html;
 use yii\widgets\LinkPager;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
+
+$use = '';
+foreach($theSlide as $v){
+    if($v['use_slide'] == 1){
+        $use .= $v['id'].',';
+    }
+}
+
+// var_dump($use);exit();
 ?>
 
 <!--grid-->
@@ -32,7 +41,7 @@ use yii\helpers\ArrayHelper;
 	        <div>
 	        	<a href="/admin/slide/c" class=" btn btn-primary">Create new <i class="fa fa-pencil" aria-hidden="true"></i></a>	 
 				<a class="btn btn-primary" id="update_use">Update</a>   
-                <?= Html::textInput('id_check', '', ['class'=>'form-control hide id_check']) ?>   
+                <?= Html::textInput('id_check', $use , ['class'=>'form-control hide id_check']) ?>   
 	        </div>
 		</div>		
 		<!-- END SEARCH BOX -->
@@ -102,6 +111,8 @@ $('#slide_tbl').on('click','input.check_id', function(){
     var id = tr.data('id');
 
     var	id_check = $('.id_check').val();	
+
+    console.log(id_check);
     
     if(document.getElementById('check_id_'+id).checked) {
         id_check = id_check + id + ',';
