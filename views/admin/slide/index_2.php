@@ -31,7 +31,8 @@ use yii\helpers\ArrayHelper;
 	        </div>
 	        <div>
 	        	<a href="/admin/slide/c" class=" btn btn-primary">Create new <i class="fa fa-pencil" aria-hidden="true"></i></a>	 
-				<a href="" class=" btn btn-primary" id="update_use">Update</a>       	
+				<a class="btn btn-primary" id="update_use">Update</a>   
+                <?= Html::textInput('id_check', '', ['class'=>'form-control hide id_check']) ?>   
 	        </div>
 		</div>		
 		<!-- END SEARCH BOX -->
@@ -40,7 +41,7 @@ use yii\helpers\ArrayHelper;
 		<div class="box">			
 			<!-- /.box-header -->
 			<div class="box-body">
-				<table id="example1" class="table table-bordered table-striped">
+				<table id="slide_tbl" class="table table-bordered table-striped">
 					<thead>
 						<tr>
 							<th style="color: red; width: 10%">ID</th>
@@ -55,7 +56,7 @@ use yii\helpers\ArrayHelper;
 					</thead>
 					<tbody>
 					<?php foreach ($theSlide as $v){?>
-						<tr>
+						<tr class="tr-v" data-id="<?= $v['id'] ?>" id="h_<?= $v['id'] ?>">
 							<td><?= $v['id']?></td>												
 							<td><?= str_repeat('--', $v['depth']). ' ' . $v['slide_detail']['name'] ?></td>			
 							<td><?=  $v['type_slide'] ?></td>						
@@ -64,7 +65,7 @@ use yii\helpers\ArrayHelper;
       							<a title="<?=Yii::t('app', 'move')?>" class="text-muted" href="/admin/slide/movedown?id=<?=$v['id']?>"><i class="fa fa-arrow-down"></i></a>
      						</td>								
 							<td>
-								<input type="checkbox" name="check_box" value="<?= $v['id']?>" class="check_id" id="check_id_<?= $v['id'] ?>">				
+								<input type="checkbox" name="check_box" value="<?= $v['use_slide']?>" class="check_id" id="check_id_<?= $v['id'] ?>" <?= $v['use_slide'] == '0' ? '' : 'checked'  ?> >				
 							</td> 
 							<td><?= $v['created_at']?></td>																	
 							<td><?= $v['user_created']['username']?></td>																						
@@ -96,18 +97,21 @@ use yii\helpers\ArrayHelper;
 <?
 $js = <<<TXT
 
-$('#example1').on('click','input.check_id', function(){
+$('#slide_tbl').on('click','input.check_id', function(){
     var tr = $(this).closest('tr.tr-v');
     var id = tr.data('id');
 
     var	id_check = $('.id_check').val();	
-
+    
     if(document.getElementById('check_id_'+id).checked) {
         id_check = id_check + id + ',';
         $('.id_check').val(id_check);	 
+
+        console.log($('.id_check').val());
     } else {
         id_check= id_check.replace(id+',', "")        
         $('.id_check').val(id_check);
+        console.log($('.id_check').val());
     }
 
     
