@@ -134,6 +134,10 @@ class SlideController extends MyController {
             $model->updated_at = NOW;
             $model->status = '1';
             $model->name = 'null';
+            $model->type_slide = $theForm->type;
+            $model->use_slide = $theForm->use;
+
+            var_dump($theForm->use);exit();
             // var_dump($_POST);exit();
 
             $parent_id = '1';
@@ -255,6 +259,8 @@ class SlideController extends MyController {
             $theSlide->updated_at = NOW;
             $theSlide->updated_by = USER_ID;
             $theSlide->status = 1;			
+            $model->type_slide = $theForm->type;
+            $model->use_slide = $theForm->use;
             
             $post= Yii::$app->request->post('Slide');
             $parent_id = $post['parentId'];

@@ -15,7 +15,6 @@ $userStatus = [
 	'2' => 'cho duyet',
 	'1' => 'hoat dong',
 	'0' => 'xoa',
-
 ]
 ?>
 
