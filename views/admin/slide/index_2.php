@@ -32,15 +32,15 @@ $list_id = rtrim($list_id, ',');
 	                <div class="input-group input-group-in">
 	            		<?= Html::textInput('g_name', $name, ['class'=>'form-control2 input-search', 'autocomplete'=>'off', 'placeholder'=>'Title']) ?>
 	                    
-	                    <span class="input-group-btn">
-	                        <button class="btn btn-success" type="button"><i class="fa fa-search"></i></button>
+	                    <span class="input-group-btn">                        
+	                        <button class="btn btn-search btn-success" type="submit" ><i class="fa fa-search"></i></button>
 	                    </span>
 	                </div><!-- Input Group -->
 	            </form>
 	        </div>
 	        <div>
 	        	<a href="/admin/slide/c" class=" btn btn-primary">Create new <i class="fa fa-pencil" aria-hidden="true"></i></a>	 
-				<a href="" class=" btn btn-primary" id="update_use">Update</a>       	
+				<a href="" class="btn btn-primary hide" id="update_use">Update</a>       	
                 <?= Html::textInput('id_edit', $list_id, ['class'=>'form-control hide change_id']) ?>                   
 	        </div>
 		</div>		
@@ -107,7 +107,6 @@ $list_id = rtrim($list_id, ',');
 <?
 $js = <<<TXT
 var list_id = $('.change_id').val();
-console.log(list_id);
 
 $('#example1').on('click','input.check_id', function(){
     var tr = $(this).closest('tr.tr-v');
@@ -123,6 +122,7 @@ $('#example1').on('click','input.check_id', function(){
         $('.id_check').val(id_check);
     }
 
+    $('#update_use').removeClass("hide");
     
 });
 
@@ -144,6 +144,7 @@ $('#update_use').on('click', function(){
     })
     
 });
+
 
 
 TXT;

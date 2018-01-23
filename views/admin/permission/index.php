@@ -24,13 +24,13 @@ use yii\helpers\ArrayHelper;
 	            		<?= Html::textInput('g_name', $name, ['class'=>'form-control2 input-search', 'autocomplete'=>'off', 'placeholder'=>'Title']) ?>
 	                    
 	                    <span class="input-group-btn">
-	                        <button class="btn btn-success" type="button"><i class="fa fa-search"></i></button>
+	                        <button class="btn btn-success" type="button" type="submit"><i class="fa fa-search"></i></button>
 	                    </span>
 	                </div><!-- Input Group -->
 	            </form>
 	        </div>
 	        <div>
-	        	<a href="/admin/permission/c" class=" btn btn-primary">Create new <i class="fa fa-pencil" aria-hidden="true"></i></a>	        	
+	        	<a href="/admin/permission/c" class=" btn btn-primary" >Create new <i class="fa fa-pencil" aria-hidden="true"></i></a>	        	
 	        </div>
 		</div>		
 		<!-- END SEARCH BOX -->
