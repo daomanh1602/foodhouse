@@ -19,25 +19,25 @@ class SlideController extends MyController {
     /**
      * @inheritdoc
      */
-    public function behaviors() {
-        return [ 
-            'verbs' => [ 
-                'class' => VerbFilter::className (),
-                'actions' => [ 
-                    'delete' => [ 
-                        'POST' 
-                    ] 
-                ] 
-            ] 
-        ];
-    }
+    // public function behaviors() {
+    //     return [ 
+    //         'verbs' => [ 
+    //             'class' => VerbFilter::className (),
+    //             'actions' => [ 
+    //                 'delete' => [ 
+    //                     'POST' 
+    //                 ] 
+    //             ] 
+    //         ] 
+    //     ];
+    // }
     
     /**
      * Lists all Slide models.
      * 
      * @return mixed
      */
-    public function actionIndex() {
+    public function actionIndex($action = '' ) {
         $query = Slide::find ()
                 ->where (['status' => '1'])
                 ->andWhere('depth > 0');
@@ -58,7 +58,7 @@ class SlideController extends MyController {
         ->orderBy ( 'nobi_slide.lft' )
         ->offset ( $pages->offset )
         ->limit ( $pages->limit )
-        ->with ( [
+        ->with ([
                     'slide_detail' => function ($query) {
                         $query->andWhere ( [
                                 'lang_id' => '1'
@@ -71,9 +71,28 @@ class SlideController extends MyController {
                                 'username'
                         ] );
                     }
-                ] )
+                ])
         ->asArray()
         ->all (); 		
+
+        if($action == 'update_use'){
+            $list_id = $_POST['list_id'];
+            $id_s = explode(",",$list_id);
+            foreach($id_s as $id){
+                $sql = 'UPDATE nobi_slide SET use_slide = "0" WHERE id =:id  ';
+                Yii::$app->db->createCommand($sql, [':id'=>$id])->execute();  
+            }                   
+            $id_check = rtrim($_POST['id_check'], ',');
+            $id_s = explode(",",$id_check);
+            foreach($id_s as $id){
+                $sql = 'UPDATE nobi_slide SET nobi_slide.use_slide = "1" WHERE id =:id  ';
+                Yii::$app->db->createCommand($sql, [':id'=>$id])->execute();  
+            }                   
+            // \Yii::$app->response->format = Response::FORMAT_JSON;
+            // return [
+            //     'list_id'=>$id_check,
+            // ];
+        }
 
         return $this->render ( 'index_2', [
                 'name' => $getName,

@@ -16,7 +16,11 @@ class CategoryForm extends Model
 	public $seo_description;
 	public $avatar;
 	public $status;
-	
+
+	//silde
+	public $use;
+	public $type;
+
 	public function attributeLabels()
 	{
 		return [
@@ -28,6 +32,8 @@ class CategoryForm extends Model
 			'seo_description' => Yii::t('app', 'Seo Description'),	
 			'avatar' => Yii::t('app','Avatar'),
 			'status' => Yii::t('app', 'Status'),
+			'use' => Yii::t('app', 'Use'),
+			'type' => Yii::t('app', 'Type'),
 		];
 	}
 	public function rules()
@@ -41,7 +47,7 @@ class CategoryForm extends Model
 	{
 		return [
 				'create' => ['name', 'description','content','seo_title','seo_description'],
-				'create_slide' => ['name', 'description','status'],
+				'create_slide' => ['name', 'description','status','use','type'],
 		];
 	}
 
