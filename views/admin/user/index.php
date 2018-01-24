@@ -22,8 +22,8 @@ use yii\helpers\ArrayHelper;
 				<form action="#" method="GET">
 	                <div class="input-group input-group-in">
 	                    <input type="text" name="search" class="form-control2 input-search" placeholder="Search...">
-	                    <span class="input-group-btn">
-	                        <button class="btn btn-success" type="button" type="submit"><i class="fa fa-search"></i></button>
+	                    <span class="input-group-btn">                        
+	                        <button class="btn btn-search btn-success" type="submit" ><i class="fa fa-search"></i></button>
 	                    </span>
 	                </div><!-- Input Group -->
 	            </form>

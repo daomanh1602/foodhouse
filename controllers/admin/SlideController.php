@@ -43,7 +43,7 @@ class SlideController extends MyController {
                 ->andWhere('depth > 0');
 
         
-        $getName = Yii::$app->request->get ('g_name', '' );
+        $getName = Yii::$app->request->get('g_name', '' );
         if($getName != ''){
             $query->innerJoinwith('slide_detail')->andWhere('nobi_slide_detail.name like :name',[':name'=> '%'.$getName.'%']);
         }
