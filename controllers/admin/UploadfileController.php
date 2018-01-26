@@ -17,6 +17,8 @@ class UploadfileController extends MyController
             if ($model->upload()) {
                 // file is uploaded successfully
                 return;
+            }else{
+                exit();
             }
         }
 

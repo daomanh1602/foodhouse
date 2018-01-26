@@ -40,7 +40,7 @@ class CategoryForm extends Model
 	{
 		return [
 				[['name', 'description'], 'trim'],
-				[['avatar'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+				[['avatar'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],				
 		];
 	}
 	public function scenarios()

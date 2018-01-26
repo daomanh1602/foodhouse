@@ -155,10 +155,14 @@ class SlideController extends MyController {
             $model->name = 'null';
             $model->type_slide = $theForm->type;
             $model->use_slide = $theForm->use;
+            $theForm->avatar = UploadedFile::getInstance($theForm, 'avatar');
 
-            var_dump($theForm->use);exit();
-            // var_dump($_POST);exit();
-
+            if ($theForm->upload()) {
+                $model->avatar = 'upload/slide/'.$theForm->avatar->name;
+            }else{
+                exit();
+            }
+  
             $parent_id = '1';
             $model->parent_id = $parent_id;
             
@@ -264,7 +268,7 @@ class SlideController extends MyController {
         }
         
         $theForm = new CategoryForm();
-        $theForm->scenario = 'create';
+        $theForm->scenario = 'create_slide';
         $theForm->setAttributes ( $theSlide->getAttributes (), false );
         
         $theForm->name = $theSlide['slide_detail']['name'];
@@ -273,16 +277,17 @@ class SlideController extends MyController {
         $theForm->seo_title = $theSlide ['slide_detail']['seo_title'];
         $theForm->seo_description = $theSlide ['slide_detail']['seo_description'];
 
-        if ($theForm->load( Yii::$app->request->post ()) && $theForm->validate () && !empty(Yii::$app->request->post('Slide')) ) {
-            
+         if ($theForm->load(Yii::$app->request->post()) && $theForm->validate() && Yii::$app->request->isPost) {
+
+            // var_dump($theForm->type);exit();
+
             $theSlide->updated_at = NOW;
             $theSlide->updated_by = USER_ID;
             $theSlide->status = 1;			
-            $model->type_slide = $theForm->type;
-            $model->use_slide = $theForm->use;
-            
-            $post= Yii::$app->request->post('Slide');
-            $parent_id = $post['parentId'];
+            $theSlide->type_slide = $theForm->type;
+            $theSlide->use_slide = $theForm->use;
+            $parent_id = '1';
+            $theSlide->parent_id = $parent_id;
             
             if($parent_id != $theSlide['parentId']){
                 if($theSlide->save()){
@@ -337,7 +342,7 @@ class SlideController extends MyController {
      * @return mixed
      */
     public function actionDelete($id = '') {
-        var_dump($_POST);exit();
+        // var_dump($_POST);exit();
         $model = $this->findModel($id);
         
         if (! $model|| $model['status'] === 0) {
