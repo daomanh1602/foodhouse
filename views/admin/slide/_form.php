@@ -21,8 +21,27 @@ $list_check = [
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data'], 'enableClientScript' => false]) ?>
 
-	<div class="form-group ">        
-        <?= $form->field($theForm, 'avatar')->widget(FileInput::classname(), ['options' => ['accept' => 'image/*'],'pluginOptions' => ['showUpload' => false,'showCancel' => false,]]); ?>
+	<div class="form-group">               
+        <?= $form->field($theForm, 'avatar')
+                                ->widget( FileInput::classname(), [ 
+                                                    'options' => ['accept' => 'image/*'],
+                                                    'pluginOptions' => [
+                                                        'showUpload' => false,
+                                                        'showCancel' => false,
+                                                        'initialPreview'=>[
+                                                            $theForm->avatar,                                                            
+                                                        ],
+                                                        'initialPreviewAsData'=>true,
+                                                        'initialCaption'=>"The Moon and the Earth",
+                                                        'initialPreviewConfig' => [                                                        
+                                                            ['caption' => $theForm->avatar, 'size' => '1287883'],
+                                                        ],
+                                                        'overwriteInitial'=>false,
+                                                        'maxFileSize'=>2800
+                                                    ] ,
+                                                    
+                                        ]); 
+        ?>
 	</div>
 
 	<div class="form-group">			
