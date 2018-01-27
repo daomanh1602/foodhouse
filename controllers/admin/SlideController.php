@@ -276,6 +276,9 @@ class SlideController extends MyController {
         $theForm->content = $theSlide['slide_detail']['content'];			
         $theForm->seo_title = $theSlide ['slide_detail']['seo_title'];
         $theForm->seo_description = $theSlide ['slide_detail']['seo_description'];
+        $theForm->avatar = Yii::$app->urlManager->baseUrl .'/'.$theSlide ['avatar'];
+        
+        // var_dump($theForm->avatar);exit();
 
          if ($theForm->load(Yii::$app->request->post()) && $theForm->validate() && Yii::$app->request->isPost) {
 
