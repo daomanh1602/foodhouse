@@ -14,7 +14,10 @@ $list_type = [
 $list_check = [
     '0' => 'Yes',
 	'1' => 'No',
-]
+];
+
+// var_dump($theForm->avatar);exit();
+
 ?>
 
 <div class="testtbl-form">
@@ -28,15 +31,16 @@ $list_check = [
                                                     'pluginOptions' => [
                                                         'showUpload' => false,
                                                         'showCancel' => false,
+                                                        'showRemove' => false,
                                                         'initialPreview'=>[
                                                             $theForm->avatar,                                                            
                                                         ],
                                                         'initialPreviewAsData'=>true,
-                                                        'initialCaption'=>"The Moon and the Earth",
+                                                        'initialCaption'=>$theForm->avatar,
                                                         'initialPreviewConfig' => [                                                        
                                                             ['caption' => $theForm->avatar, 'size' => '1287883'],
                                                         ],
-                                                        'overwriteInitial'=>false,
+                                                        'overwriteInitial'=>true,
                                                         'maxFileSize'=>2800
                                                     ] ,
                                                     

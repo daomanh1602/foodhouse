@@ -276,21 +276,33 @@ class SlideController extends MyController {
         $theForm->content = $theSlide['slide_detail']['content'];			
         $theForm->seo_title = $theSlide ['slide_detail']['seo_title'];
         $theForm->seo_description = $theSlide ['slide_detail']['seo_description'];
+        $theForm->type = $theSlide['type_slide'];
+        $theForm->use = $theSlide ['use_slide'];
         $theForm->avatar = Yii::$app->urlManager->baseUrl .'/'.$theSlide ['avatar'];
-        
-        // var_dump($theForm->avatar);exit();
 
-         if ($theForm->load(Yii::$app->request->post()) && $theForm->validate() && Yii::$app->request->isPost) {
+
+        if ($theForm->load(Yii::$app->request->post()) && $theForm->validate() && Yii::$app->request->isPost) {
 
             // var_dump($theForm->type);exit();
 
-            $theSlide->updated_at = NOW;
+            $theSlide->position = '0';
             $theSlide->updated_by = USER_ID;
-            $theSlide->status = 1;			
+            $theSlide->updated_at = NOW;
+            $theSlide->status = '1';
+            $theSlide->name = 'null';
             $theSlide->type_slide = $theForm->type;
             $theSlide->use_slide = $theForm->use;
+            $theForm->avatar = UploadedFile::getInstance($theForm, 'avatar');
+
+            if($theForm->avatar!= null){
+                if ($theForm->upload()) {
+                    $theSlide->avatar = 'upload/slide/'.$theForm->avatar->name;
+                }else{
+                    exit();
+                }
+            }
+            
             $parent_id = '1';
-            $theSlide->parent_id = $parent_id;
             
             if($parent_id != $theSlide['parentId']){
                 if($theSlide->save()){
@@ -301,6 +313,8 @@ class SlideController extends MyController {
                         $theSlide->appendTo($parent);
                     }					
                 }
+            }else{
+                $theSlide->save();
             }
             $id = $theSlide->id;
             
