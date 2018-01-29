@@ -1,4 +1,4 @@
-<?php 
+<?php
 Yii::$app->params['page_title'] = Yii::$app->params['page_title'] == '' ? $this->title : Yii::$app->params['page_title'];
 Yii::$app->params['page_small_title'] = Yii::$app->params['page_small_title'] == '' ? '': Yii::$app->params['page_small_title'];
 Yii::$app->params['page_meta_title'] = Yii::$app->params['page_meta_title'] == '' ? Yii::$app->params['page_title'] : Yii::$app->params['page_meta_title'];
@@ -37,6 +37,13 @@ Yii::$app->params['page_meta_title'] = Yii::$app->params['page_meta_title'] == '
 
 
     <link rel="stylesheet" href="/assets/front_end/style.css">
+    <link rel="stylesheet" href="/assets/front_end/slide.css">
+
+    <style>
+        .mySlides {display:none}
+        .w3-left, .w3-right, .w3-badge {cursor:pointer}
+        .w3-badge {height:13px;width:13px;padding:0}
+    </style>
 
 </head>
 
@@ -96,7 +103,7 @@ Yii::$app->params['page_meta_title'] = Yii::$app->params['page_meta_title'] == '
     </div>
     <!-- #Header Starts -->
     
-        <?php echo $content;?>	
+        <?php echo $content;?>  
 
     <!-- Footer Starts -->
     <div class="footer text-center spacer">
@@ -153,6 +160,63 @@ Yii::$app->params['page_meta_title'] = Yii::$app->params['page_meta_title'] == '
 
     <!-- custom script -->
     <script src="/assets/front_end/script.js"></script>
+
+    <script>
+
+        var myIndex = 0;
+        var x = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("demo");
+
+        carousel();
+        showDivs(myIndex);
+
+        function plusDivs(n) {
+            showDivs(myIndex += n);
+        }
+
+        function currentDiv(n) {
+            showDivs(myIndex = n);
+        }
+
+        function showDivs(n) {
+            var i;
+            
+            if (n > x.length) {
+                myIndex = 1
+            }    
+            if (n < 1) {
+                myIndex = x.length
+            }
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";  
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" w3-white", "");
+            }
+            x[myIndex-1].style.display = "block";  
+            dots[myIndex-1].className += " w3-white";
+            setTimeout(2500);
+        }
+        
+        function carousel() {
+            var i;
+
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";  
+            }
+            myIndex++;
+            if (myIndex > x.length) {
+                myIndex = 1
+            }    
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" w3-white", "");
+            }
+            dots[myIndex-1].className += " w3-white";
+            x[myIndex-1].style.display = "block";  
+            
+            setTimeout(carousel, 2500); // Change image every 2 seconds
+        }
+    </script>
 
 </body>
 
