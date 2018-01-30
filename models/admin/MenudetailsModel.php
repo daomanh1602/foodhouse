@@ -11,7 +11,7 @@ class MenudetailsModel extends ActiveRecord
 	{
 		return '{{%menu_detail}}';
 	}
-	public function getCategory() {
+	public function getMenu() {
 		return $this->hasOne(Menu::className(), ['id' => 'cate_id']);
 	}
 	

@@ -11,6 +11,7 @@ Yii::$app->params['page_small_title'] = 'Create Slide';
 		<?= $this->render('_form', [
        		'model' => $model,
 			'theForm' => $theForm,
+			'type_slide' => $type_slide,
     	]) ?>
 	</div>
 	<!---->

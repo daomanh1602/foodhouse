@@ -4,7 +4,7 @@ Yii::$app->params['page_small_title'] = 'Create post';
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
-
+use kartik\widgets\FileInput;
 $list_parent = [];
 
 foreach ($theCategoryHas as $t){
@@ -21,8 +21,28 @@ foreach ($theCategoryHas as $t){
 			<div class="form-group">
 				<?=$form->field($thePostForm, 'cate_id')->dropDownList(ArrayHelper::map($list_parent, 'id', 'name')); ?>
 			</div>
-			<div class="form-group">
-				<?=$form->field($thePostForm, 'avatar')->fileInput(); ?>
+			<div class="form-group">				
+				<?= $form->field($thePostForm, 'avatar')
+                                ->widget( FileInput::classname(), [ 
+                                                    'options' => ['accept' => 'image/*'],
+                                                    'pluginOptions' => [
+                                                        'showUpload' => false,
+                                                        'showCancel' => false,
+                                                        'showRemove' => false,
+                                                        'initialPreview'=>[															
+                                                            $thePostForm->avatar,                                                            
+                                                        ],
+                                                        'initialPreviewAsData'=>true,
+                                                        'initialCaption'=>$thePostForm->avatar,
+                                                        'initialPreviewConfig' => [                                                        
+                                                            ['caption' => $thePostForm->avatar, 'size' => '1287883'],
+                                                        ],
+                                                        'overwriteInitial'=>true,
+                                                        'maxFileSize'=>2800
+                                                    ] ,
+                                                    
+                                        ]); 
+        		?>
 			</div>						
 			<div class="form-group">
 				<?=$form->field($thePostForm, 'name')?>
@@ -52,7 +72,7 @@ foreach ($theCategoryHas as $t){
 
 <?php
 $js = <<<'JS'
-    $('#postform-content').ckeditor({
+    $('#postform-content,#postform-description').ckeditor({
         allowedContent: 'p sub sup strong em s a i u ul ol li blockquote; img(*)[*]{*};',
         entities: false,
         entities_greek: false,

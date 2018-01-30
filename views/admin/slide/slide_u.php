@@ -15,6 +15,7 @@ use app\models\admin\Category;
 		<?= $this->render('_form', [
        		'model' => $model,
 			'theForm' => $theForm,
+			'type_slide' => $type_slide,
     	]) ?>
 	</div>
 	<!---->

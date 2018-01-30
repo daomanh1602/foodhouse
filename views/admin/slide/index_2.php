@@ -27,17 +27,30 @@ $list_id = rtrim($list_id, ',');
 		
 		<!-- SEARCH BOX -->
 		<div class="col-md-12">		
-			<div class="col-md-4 compose" style="float: right;">
+			<div class="col-md-6 compose" style="float: right;">
 				<form action="#" method="GET">
-	                <div class="input-group input-group-in">
-	            		<?= Html::textInput('g_name', $name, ['class'=>'form-control2 input-search', 'autocomplete'=>'off', 'placeholder'=>'Title']) ?>
-	                    
-	                    <span class="input-group-btn">                        
-	                        <button class="btn btn-search btn-success" type="submit" ><i class="fa fa-search"></i></button>
-	                    </span>
-	                </div><!-- Input Group -->
+	               
+					<div class="col-md-6 ">
+						<?= Html::dropDownList(
+							'type_s',
+							'',
+							ArrayHelper::map($type_slide, 'id', 'name_1'),
+							['prompt'=>	'Select parent ','class'=>'form-control2']	
+						)?>
+					</div>
+					<div class="col-md-6 ">
+						<div class="input-group input-group-in">
+							<?= Html::textInput('g_name', $name, ['class'=>'form-control2 input-search', 'autocomplete'=>'off', 'placeholder'=>'Title']) ?>
+
+							<span class="input-group-btn">                        
+								<button class="btn btn-search btn-success" type="submit" ><i class="fa fa-search"></i></button>
+							</span>
+						</div><!-- Input Group -->				
+					</div>
+			
 	            </form>
 	        </div>
+			
 	        <div>
 	        	<a href="/admin/slide/c" class=" btn btn-primary">Create new <i class="fa fa-pencil" aria-hidden="true"></i></a>	 
 				<a href="" class="btn btn-primary hide" id="update_use">Update</a>       	
@@ -69,7 +82,7 @@ $list_id = rtrim($list_id, ',');
 						<tr class="tr-v" data-id="<?= $v['id'] ?>" id="h_<?= $v['id'] ?>">
 							<td><?= $v['id']?></td>												
 							<td><?= str_repeat('--', $v['depth']). ' ' . $v['slide_detail']['name'] ?></td>			
-							<td><?=  $v['type_slide'] ?></td>						
+							<td><?= $v['slide_type']['name_1'] ?></td>						
 							<td>
       							<a title="<?=Yii::t('app', 'move')?>" class="text-muted" href="/admin/slide/moveup?id=<?=$v['id']?>"><i class="fa fa-arrow-up "></i></a> | 
       							<a title="<?=Yii::t('app', 'move')?>" class="text-muted" href="/admin/slide/movedown?id=<?=$v['id']?>"><i class="fa fa-arrow-down"></i></a>

@@ -128,6 +128,11 @@ class Slide extends \yii\db\ActiveRecord
     {
     	return $this->hasOne(SlidedetailsModel::className(), ['cate_id' => 'id']);
     }
+
+    public function getSlide_type()
+    {
+    	return $this->hasOne(TypeslideModel::className(), ['id' => 'type_slide']);
+    }
     
     public function getUser_created()
     {

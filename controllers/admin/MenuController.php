@@ -71,6 +71,7 @@ class MenuController extends MyController {
                 ] )
         ->asArray()
         ->all (); 		
+        
 
         return $this->render ( 'index_2', [
                 'name' => $getName,
@@ -98,6 +99,7 @@ class MenuController extends MyController {
      * @return mixed
      */
     public function actionC() {
+       
         $model = new Menu ();
         
         $theForm = new MenuForm();
@@ -116,19 +118,19 @@ class MenuController extends MyController {
                     ]);
                 }
                 
-                ] )
+            ] )
             ->asArray()
             ->all (); 
                 
         if ($theForm->load(Yii::$app->request->post()) && $theForm->validate() && !empty(Yii::$app->request->post('Menu'))) {
             
-            $post= Yii::$app->request->post('menu');
+            $post= Yii::$app->request->post('Menu');
             
             $model->position = '0';
             $model->created_by = USER_ID;
             $model->updated_by = USER_ID;
             $model->created_at = NOW;
-            $model->updated_at = NOW;
+            $model->updated_at = NOW;            
             $model->status = '1';
             $model->name = 'null';			
             $parent_id = $post ['parentId'];
@@ -142,18 +144,15 @@ class MenuController extends MyController {
                 
                 $a = $model->appendTo ($parent);
 
-                $child_id = $model->id;
+                $child_id = $model->id;            
                 
                 if ($child_id != '') {
                     $r2 = Yii::$app->db->createCommand ()->insert ( 'nobi_menu_detail', [
                             'cate_id' => $child_id,
                             'name' => $theForm->name,
-                            'lang_id' => '1',
-                            'description' => $theForm->description,
-                            'content' => $theForm->content,
+                            'lang_id' => '1',                           
                             'slug' => str_replace(' ','-',$theForm->name),
-                            'seo_title' =>  $theForm->seo_title,
-                            'seo_description' =>  $theForm->seo_description
+                            'url' => $theForm->url,
                         ] )->execute ();
                         
                     if ($r2) {
@@ -168,56 +167,14 @@ class MenuController extends MyController {
                 }	
             }
         
-            
-            return $this->redirect ( [
-                'view',
-                'id' => $model->id 
-               ] );
+            $this->genderfile();
+            return $this->redirect(['index']);
         }
 
         return $this->render ( 'menu_c', [ 
             'model' => $model ,
             'theForm' => $theForm,
             'theParent' => $the_Menu,
-        ] );
-    }
-
-    /**
-     * Updates an existing Menu model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * 
-     * @param integer $id        	
-     * @return mixed
-     * Khong dung 
-     */
-    public function actionUpdate($id) {
-        $model = $this->findModel ( $id );
-        
-        $theForm = new MenuForm();
-        $theForm->scenario = 'create';
-        
-        if(!empty(Yii::$app->request->post('Menu'))){        	
-            $post= Yii::$app->request->post('Menu');
-            
-            $model->name = $post['name'];
-            $model->position = $post['position'];
-            $parent_id = $post['parentId'];
-            
-            if($model->save()){				
-                if(empty($parent_id)){					
-                    $model->makeRoot();
-                }else { //change root
-                    $parent = Menu::findOne($parent_id);
-                    $model->appendTo($parent);
-                }
-                return $this->redirect(['index']);
-            }
-            
-        }			
-        
-        return $this->render ( 'update', [ 
-                'model' => $model ,
-                'theForm' => $theForm
         ] );
     }
     
@@ -290,8 +247,8 @@ class MenuController extends MyController {
                 $result = '0';
                 MyController::actionSavelog ( $action, $result );
              }
-            
-             return $this->redirect(['index']);
+            $this->genderfile();
+            return $this->redirect(['index']);
         }
         
         return $this->render ( 'Menu_u', [
@@ -300,43 +257,6 @@ class MenuController extends MyController {
 // 				'theParent' => $the_Menu,
         ] );
     }
-    
-    /**
-     * Deletes an existing Menu model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * 
-     * @param integer $id        	
-     * @return mixed
-     * khong dung
-     */
-    public function actionDelete($id = '') {
-        var_dump($_POST);exit();
-        $model = $this->findModel($id);
-        
-        if (! $model|| $model['status'] === 0) {
-            throw new HttpException ( 404, 'Post not found' );
-        }
-        
-        if($model->isRoot()){
-            $result = $model->deleteWithChildren();
-        }else {
-            $result = $model->delete();
-        }
-        if ($result) {
-            $action = 'Delete Menu id :' . $id;
-            $result = '1';
-            MyController::actionSavelog ( $action, $result );
-        } else {
-            $action = 'Delete Menu :' . $id;
-            $result = '0';
-            MyController::actionSavelog ( $action, $result );
-        }
-
-        return $this->redirect ( [ 
-                'index' 
-        ] );
-    }
-    
     
     public function actionD($id = '') {
         $model = $this->findModel($id);
@@ -359,12 +279,37 @@ class MenuController extends MyController {
             $result = '0';
             MyController::actionSavelog ( $action, $result );
         }
-        
+        $this->genderfile();
         return $this->redirect ( [
                 'index'
         ] );
 // 		var_dump($id);exit();
     }
+
+    public function actionMoveup($id){
+        
+        $model = $this->findModel($id);
+        $a = $model->prev()->one();
+        if(isset($a)){
+            $model->insertBefore($a);
+        }        
+        $this->genderfile();
+        return $this->redirect(['index']);
+        
+    }
+
+    public function actionMovedown($id){
+
+        $model = $this->findModel($id);
+        $a = $model->next()->one();
+        if(isset($a)){
+            $model->insertAfter($a);
+        }        
+        $this->genderfile();
+        return $this->redirect(['index']);
+        
+    }    
+
     /**
      * Finds the Menu model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -380,4 +325,36 @@ class MenuController extends MyController {
             throw new NotFoundHttpException ( 'The requested page does not exist.' );
         }
     }
+
+      private function Genderfile(){
+        $query = Menu::find ()    
+            ->select(['id'])            
+            ->where (['status' => '1'])
+            ->andWhere('depth > 0')               
+            ->with ( [
+                'menu_detail' => function ($query) {
+                    $query->andWhere ( [
+                        'lang_id' => '1'
+                    ]);			
+                }                    
+            ] )	
+            ->orderBy ( 'nobi_menu.lft' )
+            ->asArray()            
+            ->all (); 	
+
+        $myfile = fopen("menu.php", "w") or die("Unable to open file!");
+        $txt = "";
+        
+                                
+                            
+        foreach($query as $k => $v){
+            $txt .= '<li class="active">';
+            $txt .= '   <a href="'.$v['menu_detail']['url'].'">'.$v['menu_detail']['name'].'</a>';
+            $txt .= '</li>';
+        }
+
+        fwrite($myfile, $txt);
+        fclose($myfile);
+    }
+
 }

@@ -1,7 +1,7 @@
 <div id="home">
     <!-- Slider Starts -->
     <div class="banner">
-        <div class="mySlides">
+        <!--<div class="mySlides">
             <img src="/assets/front_end/images/back.jpg" alt="banner" class="img-responsive">
             <div class="caption">
                 <div class="caption-wrapper">
@@ -15,49 +15,15 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
 
-        <div class="mySlides">
-            <img src="/assets/front_end/images/back.jpg" alt="banner" class="img-responsive">
-            <div class="caption">
-                <div class="caption-wrapper">
-                    <div class="caption-info">
-                        <i class="fa fa-coffee fa-5x animated bounceInDown"></i>
-                        <h1 class="animated bounceInUp">Best place for delicious pizza and coffee 2</h1>
-                        <p class="animated bounceInLeft">Lorem Ipsum is simply dummy text of the printing and typesetting industry 2. </p>
-                        <a href="#menu" class="explore animated bounceInDown">
-                            <i class="fa fa-angle-down  fa-3x"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="mySlides">
-            <img src="/assets/front_end/images/back.jpg" alt="banner" class="img-responsive">
-            <div class="caption">
-                <div class="caption-wrapper">
-                    <div class="caption-info">
-                        <i class="fa fa-coffee fa-5x animated bounceInDown"></i>
-                        <h1 class="animated bounceInUp">Best place for delicious pizza and coffee 3</h1>
-                        <p class="animated bounceInLeft">Lorem Ipsum is simply dummy text of the printing and typesetting industry 3. </p>
-                        <a href="#menu" class="explore animated bounceInDown">
-                            <i class="fa fa-angle-down  fa-3x"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php include("slide.php"); ?>
     </div>
 
     <div class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)" style="font-size:25px">&#10094;</div>
     <div class="w3-button w3-display-right w3-black" onclick="plusDivs(1)"  style="font-size:25px">&#10095;</div>
 
-    <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">        
-        <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
-        <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
-        <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
-    </div>
+   
     <!-- #Slider Ends -->
 </div>
 

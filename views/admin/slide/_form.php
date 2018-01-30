@@ -3,7 +3,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\models\admin\Slide;
 use kartik\widgets\FileInput;
-
+use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 /* @var $model app\models\Testtbl */
 /* @var $form yii\widgets\ActiveForm */
@@ -16,7 +16,7 @@ $list_check = [
 	'1' => 'No',
 ];
 
-// var_dump($theForm->avatar);exit();
+// var_dump($type_slide);exit();
 
 ?>
 
@@ -55,7 +55,8 @@ $list_check = [
     <?= $form->field($theForm, 'use' , ['enableClientValidation'=>false])->checkbox() ?>
 
     <div class="form-group">
-        <?=$form->field($theForm, 'type')->dropDownList($list_type); ?>
+    	<?=$form->field($theForm, 'type')->dropDownList(ArrayHelper::map($type_slide, 'id', 'name')); ?>
+        
     </div>
 
     <div class="form-group">			
@@ -70,3 +71,24 @@ $list_check = [
 
 </div>
 
+<?php
+$js = <<<'JS'
+    $('#categoryform-description').ckeditor({
+        allowedContent: 'p sub sup strong em s a i u ul ol li blockquote; img(*)[*]{*};',
+        entities: false,
+        entities_greek: false,
+        entities_latin: false,
+        uiColor: '#ffffff',
+        height:400,
+        contentsCss: '/assets/css/style_ckeditor.css'
+    });
+JS;
+
+$this->registerJs ( $js );
+
+$this->registerJsFile ( 'https://cdn.ckeditor.com/4.7.3/basic/ckeditor.js', [
+        'depends' => 'yii\web\JqueryAsset'
+] );
+$this->registerJsFile ( 'https://cdn.ckeditor.com/4.7.3/basic/adapters/jquery.js', [
+        'depends' => 'yii\web\JqueryAsset'
+] );

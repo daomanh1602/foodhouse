@@ -4,6 +4,7 @@ namespace app\controllers\admin;
 
 use Yii;
 use app\models\admin\Slide;
+use app\models\admin\TypeslideModel;
 use app\models\admin\CategoryForm;
 use app\models\admin\SlideSearch;
 use yii\web\NotFoundHttpException;
@@ -19,18 +20,18 @@ class SlideController extends MyController {
     /**
      * @inheritdoc
      */
-    // public function behaviors() {
-    //     return [ 
-    //         'verbs' => [ 
-    //             'class' => VerbFilter::className (),
-    //             'actions' => [ 
-    //                 'delete' => [ 
-    //                     'POST' 
-    //                 ] 
-    //             ] 
-    //         ] 
-    //     ];
-    // }
+    public function behaviors() {
+        return [ 
+            'verbs' => [ 
+                'class' => VerbFilter::className (),
+                'actions' => [ 
+                    'delete' => [ 
+                        'POST' 
+                    ] 
+                ] 
+            ] 
+        ];
+    }
     
     /**
      * Lists all Slide models.
@@ -48,6 +49,11 @@ class SlideController extends MyController {
             $query->innerJoinwith('slide_detail')->andWhere('nobi_slide_detail.name like :name',[':name'=> '%'.$getName.'%']);
         }
         
+        $getType = Yii::$app->request->get('type_s', '' );
+        if($getType != ''){
+            $query->innerJoinwith('slide_type')->andWhere('nobi_type_slide.id = :id',[':id'=> $getType]);           
+        }
+
         $countQuery = clone $query;
         $pages = new Pagination ( [
                 'totalCount' => $countQuery->count (),
@@ -65,6 +71,13 @@ class SlideController extends MyController {
                         ]);			
                     },
                     
+                    'slide_type'=>function ($query) {
+                        $query->select ( [
+                                'id',
+                                'name_1'
+                        ] );	
+                    },
+
                     'user_created' => function ($query) {
                         $query->select ( [
                                 'id',
@@ -73,7 +86,9 @@ class SlideController extends MyController {
                     }
                 ])
         ->asArray()
-        ->all (); 		
+        ->all (); 	
+
+        $type_slide = TypeslideModel::find()->select(['id','name_1 as name'])->all();
 
         if($action == 'update_use'){
             $list_id = $_POST['list_id'];
@@ -88,16 +103,16 @@ class SlideController extends MyController {
                 $sql = 'UPDATE nobi_slide SET nobi_slide.use_slide = "1" WHERE id =:id  ';
                 Yii::$app->db->createCommand($sql, [':id'=>$id])->execute();  
             }                   
-            // \Yii::$app->response->format = Response::FORMAT_JSON;
-            // return [
-            //     'list_id'=>$id_check,
-            // ];
+
+            $this->genderfile();
+
         }
 
         return $this->render ( 'index_2', [
                 'name' => $getName,
                 'theSlide'=> $the_Slide,
                 'pages' => $pages ,
+                'type_slide' => $type_slide
         ] );
     }
     
@@ -140,7 +155,8 @@ class SlideController extends MyController {
         ])
         ->asArray()
         ->all (); 
- 
+
+        $type_slide = TypeslideModel::find()->select(['id','name_1 as name'])->asArray()->all();
 
         if ($theForm->load(Yii::$app->request->post()) && $theForm->validate() && Yii::$app->request->isPost) {
             
@@ -197,57 +213,15 @@ class SlideController extends MyController {
                     }
                 }	
             }
-        
+            $this->genderfile();
             return $this->redirect ( '@web/admin/slide' );
-
-            // return $this->redirect ( [
-            //     'view',
-            //     'id' => $model->id 
-            // ] );
         }
         
         return $this->render ( 'slide_c', [ 
             'model' => $model ,
             'theForm' => $theForm,
             'theParent' => $the_Slide,
-        ] );
-    }
-
-    /**
-     * Updates an existing Slide model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * 
-     * @param integer $id        	
-     * @return mixed
-     */
-    public function actionUpdate($id) {
-        $model = $this->findModel ( $id );
-        
-        $theForm = new CategoryForm();
-        $theForm->scenario = 'create';
-        
-        if(!empty(Yii::$app->request->post('Slide'))){        	
-            $post= Yii::$app->request->post('Slide');
-            
-            $model->name = $post['name'];
-            $model->position = $post['position'];
-            $parent_id = $post['parentId'];
-            
-            if($model->save()){				
-                if(empty($parent_id)){					
-                    $model->makeRoot();
-                }else { //change root
-                    $parent = Slide::findOne($parent_id);
-                    $model->appendTo($parent);
-                }
-                return $this->redirect(['index']);
-            }
-            
-        }			
-        
-        return $this->render ( 'update', [ 
-                'model' => $model ,
-                'theForm' => $theForm
+            'type_slide' => $type_slide
         ] );
     }
     
@@ -280,6 +254,7 @@ class SlideController extends MyController {
         $theForm->use = $theSlide ['use_slide'];
         $theForm->avatar = Yii::$app->urlManager->baseUrl .'/'.$theSlide ['avatar'];
 
+        $type_slide = TypeslideModel::find()->select(['id','name_1 as name'])->asArray()->all();
 
         if ($theForm->load(Yii::$app->request->post()) && $theForm->validate() && Yii::$app->request->isPost) {
 
@@ -339,53 +314,17 @@ class SlideController extends MyController {
                 $action = 'Update Slide id :' . $id;
                 $result = '0';
                 MyController::actionSavelog ( $action, $result );
-             }
-            
-             return $this->redirect(['index']);
+            }
+            $this->genderfile();
+            return $this->redirect(['index']);
         }
         
         return $this->render ( 'Slide_u', [
                 'model' => $theSlide,
                 'theForm' => $theForm,
-// 				'theParent' => $the_Slide,
+				'type_slide' => $type_slide,
         ] );
     }
-    
-    /**
-     * Deletes an existing Slide model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * 
-     * @param integer $id        	
-     * @return mixed
-     */
-    public function actionDelete($id = '') {
-        // var_dump($_POST);exit();
-        $model = $this->findModel($id);
-        
-        if (! $model|| $model['status'] === 0) {
-            throw new HttpException ( 404, 'Post not found' );
-        }
-        
-        if($model->isRoot()){
-            $result = $model->deleteWithChildren();
-        }else {
-            $result = $model->delete();
-        }
-        if ($result) {
-            $action = 'Delete Slide id :' . $id;
-            $result = '1';
-            MyController::actionSavelog ( $action, $result );
-        } else {
-            $action = 'Delete Slide :' . $id;
-            $result = '0';
-            MyController::actionSavelog ( $action, $result );
-        }
-
-        return $this->redirect ( [ 
-                'index' 
-        ] );
-    }
-    
     
     public function actionD($id = '') {
         $model = $this->findModel($id);
@@ -408,7 +347,7 @@ class SlideController extends MyController {
             $result = '0';
             MyController::actionSavelog ( $action, $result );
         }
-        
+        $this->genderfile();
         return $this->redirect ( [
                 'index'
         ] );
@@ -422,6 +361,7 @@ class SlideController extends MyController {
         if(isset($a)){
             $model->insertBefore($a);
         }        
+        $this->genderfile();
         return $this->redirect(['index']);
         
     }
@@ -433,6 +373,7 @@ class SlideController extends MyController {
         if(isset($a)){
             $model->insertAfter($a);
         }        
+        $this->genderfile();
         return $this->redirect(['index']);
         
     }
@@ -453,4 +394,60 @@ class SlideController extends MyController {
             throw new NotFoundHttpException ( 'The requested page does not exist.' );
         }
     }
+
+    private function Genderfile(){
+        $query = Slide::find ()
+            ->select('id, avatar')
+            ->where (['status' => '1'])
+            ->andWhere('depth > 0')
+            ->andWhere('use_slide = 1')
+            ->orderBy ( 'nobi_slide.lft' )
+            ->asArray()
+            ->all (); 	
+
+        $myfile = fopen("slide.php", "w") or die("Unable to open file!");
+        $txt = "";
+        
+        foreach($query as $k => $v){
+            $txt .= '<div class="mySlides">';
+            $txt .= '   <img src="'.$v['avatar'].'" alt="banner" class="img-responsive"> ';
+            $txt .= '   <div class="caption"> ';
+            $txt .= '       <div class="caption-wrapper">' ;
+            $txt .= '           <div class="caption-info"> ' ;
+            $txt .= '               <i class="fa fa-coffee fa-5x animated bounceInDown"></i> ';
+            $txt .= '               <h1 class="animated bounceInUp">Best place for delicious pizza and coffee</h1>';
+            $txt .= '               <p class="animated bounceInLeft">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>';
+            $txt .= '               <a href="#menu" class="explore animated bounceInDown">';
+            $txt .= '                   <i class="fa fa-angle-down  fa-3x"></i>';
+            $txt .= '               </a>';
+            $txt .= '           </div>';
+            $txt .= '       </div>';
+            $txt .= '   </div>';
+            $txt .= '</div>';
+        }
+
+        fwrite($myfile, $txt);
+        fclose($myfile);
+
+        // if (!empty($_SERVER["HTTP_CLIENT_IP"]))
+        // {
+        // //check for ip from share internet
+        //     $ip = $_SERVER["HTTP_CLIENT_IP"];
+        // }
+        // elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"]))
+        // {
+        // // Check for the Proxy User
+        //     $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+        // }
+        // else
+        // {
+        //     $ip = $_SERVER["REMOTE_ADDR"];
+        // }
+
+        // return $this->render('view_file', [
+        //         'ip' => $ip,
+        // ]);    
+        // var_dump($query);exit();    
+    }
+
 }

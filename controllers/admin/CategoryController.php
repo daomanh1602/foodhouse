@@ -175,7 +175,6 @@ class CategoryController extends MyController {
             //     'id' => $model->id 
             // ] );
         }
-// 	return $this->render ( 'create', [
         return $this->render ( 'category_c', [ 
             'model' => $model ,
             'theForm' => $theForm,
@@ -183,43 +182,36 @@ class CategoryController extends MyController {
         ] );
     }
 
-    /**
-     * Updates an existing Category model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * 
-     * @param integer $id        	
-     * @return mixed
-     */
-    public function actionUpdate($id) {
-        $model = $this->findModel ( $id );
+    // public function actionUpdate($id) {
+    //     $model = $this->findModel ( $id );
         
-        $theForm = new CategoryForm();
-        $theForm->scenario = 'create';
+    //     $theForm = new CategoryForm();
+    //     $theForm->scenario = 'create';
         
-        if(!empty(Yii::$app->request->post('Category'))){        	
-            $post= Yii::$app->request->post('Category');
+    //     if(!empty(Yii::$app->request->post('Category'))){        	
+    //         $post= Yii::$app->request->post('Category');
             
-            $model->name = $post['name'];
-            $model->position = $post['position'];
-            $parent_id = $post['parentId'];
+    //         $model->name = $post['name'];
+    //         $model->position = $post['position'];
+    //         $parent_id = $post['parentId'];
             
-            if($model->save()){				
-                if(empty($parent_id)){					
-                    $model->makeRoot();
-                }else { //change root
-                    $parent = Category::findOne($parent_id);
-                    $model->appendTo($parent);
-                }
-                return $this->redirect(['index']);
-            }
+    //         if($model->save()){				
+    //             if(empty($parent_id)){					
+    //                 $model->makeRoot();
+    //             }else { //change root
+    //                 $parent = Category::findOne($parent_id);
+    //                 $model->appendTo($parent);
+    //             }
+    //             return $this->redirect(['index']);
+    //         }
             
-        }			
+    //     }			
         
-        return $this->render ( 'update', [ 
-                'model' => $model ,
-                'theForm' => $theForm
-        ] );
-    }
+    //     return $this->render ( 'update', [ 
+    //             'model' => $model ,
+    //             'theForm' => $theForm
+    //     ] );
+    // }
     
     public function actionU($id = '') {
         $theCategory = Category::find()

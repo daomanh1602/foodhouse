@@ -240,6 +240,27 @@ License URL: bienngoc.com
                                     </li>									
                                 </ul>
                             </li>
+
+                            <li>
+                                <a href="#" class=" hvr-bounce-to-right">
+                                    <i class="fa fa-indent nav_icon"></i> 
+                                    <span class="nav-label">Menu</span>
+                                    <span class="fa arrow"></span>
+                                </a>
+                                
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="/admin/menu" class=" hvr-bounce-to-right"> 
+                                            <i class="fa fa-area-chart nav_icon"></i> - Danh sách Menu
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/admin/menu/c" class=" hvr-bounce-to-right">
+                                            <i class="fa fa-map-marker nav_icon"></i> - Thêm Menu
+                                        </a>
+                                    </li>									
+                                </ul>
+                            </li>
                             
                             <li>
                                 <a href="#" class=" hvr-bounce-to-right">

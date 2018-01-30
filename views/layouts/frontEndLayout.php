@@ -77,7 +77,7 @@ Yii::$app->params['page_meta_title'] = Yii::$app->params['page_meta_title'] == '
                     <!-- Nav Starts -->
                     <div class="navbar-collapse  collapse">
                         <ul class="nav navbar-nav navbar-right scroll">
-                            <li class="active">
+                            <!--<li class="active">
                                 <a href="#home">Home</a>
                             </li>
                             <li>
@@ -91,7 +91,8 @@ Yii::$app->params['page_meta_title'] = Yii::$app->params['page_meta_title'] == '
                             </li>
                             <li>
                                 <a href="#contact">Contact</a>
-                            </li>
+                            </li>-->
+                            <?php include('menu.php'); ?>
                         </ul>
                     </div>
                     <!-- #Nav Ends -->
@@ -165,8 +166,7 @@ Yii::$app->params['page_meta_title'] = Yii::$app->params['page_meta_title'] == '
 
         var myIndex = 0;
         var x = document.getElementsByClassName("mySlides");
-        var dots = document.getElementsByClassName("demo");
-
+       
         carousel();
         showDivs(myIndex);
 
@@ -190,11 +190,8 @@ Yii::$app->params['page_meta_title'] = Yii::$app->params['page_meta_title'] == '
             for (i = 0; i < x.length; i++) {
                 x[i].style.display = "none";  
             }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" w3-white", "");
-            }
             x[myIndex-1].style.display = "block";  
-            dots[myIndex-1].className += " w3-white";
+          
             setTimeout(2500);
         }
         
@@ -208,10 +205,7 @@ Yii::$app->params['page_meta_title'] = Yii::$app->params['page_meta_title'] == '
             if (myIndex > x.length) {
                 myIndex = 1
             }    
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" w3-white", "");
-            }
-            dots[myIndex-1].className += " w3-white";
+           
             x[myIndex-1].style.display = "block";  
             
             setTimeout(carousel, 2500); // Change image every 2 seconds
