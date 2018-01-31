@@ -1,6 +1,6 @@
 <?php
-$this->title = 'Post';
-Yii::$app->params['page_small_title'] = 'Create post';
+$this->title = Yii::t('appuser', 'Create post');
+Yii::$app->params['page_small_title'] = Yii::t('appuser', 'Create post');
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
@@ -14,10 +14,13 @@ foreach ($theCategoryHas as $t){
 
 ?>
 
-<div class="grid-form">
-	<div class="grid-form1">
-		<h3 id="forms-example" class="">Create Post</h3>
+	<div class="grid-system">
+		<div class="grid-hor">
+			<h3 id="grid-example-basic"><?php echo $this->title; ?></h3>
+		</div>
+		<hr>
 		<?php $form = ActiveForm::begin();?>
+		<div class="col-md-12">
 			<div class="form-group">
 				<?=$form->field($thePostForm, 'cate_id')->dropDownList(ArrayHelper::map($list_parent, 'id', 'name')); ?>
 			</div>
@@ -62,13 +65,14 @@ foreach ($theCategoryHas as $t){
 			<div class="form-group">
 				<?=$form->field($thePostForm, 'seo_description')->textArea(['rows'=>5])?>
 			</div>
-			<br/>
-			<div class="text-right"><?= Html::submitButton('submit', ['class' => 'btn btn-default']); ?></div>
+		</div>
+
+		<div class="text-right"><?= Html::submitButton(Yii::t('app', 'Create new'), ['class' => 'btn btn-success']); ?></div>
 
 		<?php ActiveForm::end(); ?>
 	</div>
 	<!---->
-</div>
+
 
 <?php
 $js = <<<'JS'

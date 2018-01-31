@@ -57,7 +57,7 @@ class Category extends \yii\db\ActiveRecord
         	
         	[['position'],'default','value'=>0],
         	[['tree', 'lft', 'rgt', 'depth', 'position', 'created_by', 'updated_by'], 'integer'],
-        	[['created_at', 'updated_at'], 'safe'],        	
+     	
         ];
     }
 

@@ -13,6 +13,7 @@ use yii\data\Pagination;
 use yii\web\UploadedFile;
 use yii\web\HttpException;
 
+
 /**
  * SlideController implements the CRUD actions for Slide model.
  */
@@ -20,18 +21,18 @@ class SlideController extends MyController {
     /**
      * @inheritdoc
      */
-    public function behaviors() {
-        return [ 
-            'verbs' => [ 
-                'class' => VerbFilter::className (),
-                'actions' => [ 
-                    'delete' => [ 
-                        'POST' 
-                    ] 
-                ] 
-            ] 
-        ];
-    }
+    // public function behaviors() {
+    //     return [ 
+    //         'verbs' => [ 
+    //             'class' => VerbFilter::className (),
+    //             'actions' => [ 
+    //                 'delete' => [ 
+    //                     'POST' 
+    //                 ] 
+    //             ] 
+    //         ] 
+    //     ];
+    // }
     
     /**
      * Lists all Slide models.
@@ -88,7 +89,7 @@ class SlideController extends MyController {
         ->asArray()
         ->all (); 	
 
-        $type_slide = TypeslideModel::find()->select(['id','name_1 as name'])->all();
+        $type_slide = TypeslideModel::find()->select(['id','name_1 as name'])->asArray()->all();
 
         if($action == 'update_use'){
             $list_id = $_POST['list_id'];
@@ -172,7 +173,7 @@ class SlideController extends MyController {
             $model->type_slide = $theForm->type;
             $model->use_slide = $theForm->use;
             $theForm->avatar = UploadedFile::getInstance($theForm, 'avatar');
-
+            // var_Dump($model);exit();
             if ($theForm->upload()) {
                 $model->avatar = 'upload/slide/'.$theForm->avatar->name;
             }else{
@@ -185,7 +186,7 @@ class SlideController extends MyController {
             if (empty ( $parent_id )) {
                 $model->makeRoot();				
             } else {
-                
+
                 $parent = Slide::findOne ( $parent_id );                
                 $model->appendTo ($parent);
                 $child_id = $model->id;

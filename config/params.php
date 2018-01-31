@@ -22,7 +22,7 @@ return [
 		//user
 		'components.user' => [
 			'identityClass' => 'app\models\admin\UserModel',
-			'enableAutoLogin' => true ,
+			'enableAutoLogin' => false ,
 			'authTimeout'=>720000,
 			'loginUrl'=>['admin/login'],
 		],

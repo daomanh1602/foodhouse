@@ -37,7 +37,7 @@ class UserController extends MyController {
             ->where ( [ 'status' => '1' ] )
             ->orderBy ( 'id' )           
             ->asArray()
-            ->all ();;      
+            ->all ();
         
         if ($theUser->load ( Yii::$app->request->post () ) && $theUser->validate ()) {
             
@@ -87,6 +87,13 @@ class UserController extends MyController {
             throw new HttpException(404, 'User not found');
         }			
         
+        $list_permission =  $query = PermissionModel::find ()
+            ->select('id, permission_name')
+            ->where ( [ 'status' => '1' ] )
+            ->orderBy ( 'id' )           
+            ->asArray()
+            ->all ();
+
         $theUser->scenario = 'update';
         
         if ($theUser->load ( Yii::$app->request->post () ) && $theUser->validate ()) {
@@ -117,7 +124,8 @@ class UserController extends MyController {
         }
         
         return $this->render ( 'users_u', [
-                'theUser' => $theUser
+                'theUser' => $theUser,
+                'list_permission' => $list_permission
         ] );
         
     }

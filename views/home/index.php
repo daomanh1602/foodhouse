@@ -15,13 +15,14 @@
                     </div>
                 </div>
             </div>
-        </div>-->
-
+        </div>-->        
         <?php include("slide.php"); ?>
+        
+        <div class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)" style="font-size:15px">&#10094;</div>
+        <div class="w3-button w3-display-right w3-black" onclick="plusDivs(1)"  style="font-size:15px">&#10095;</div>
     </div>
 
-    <div class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)" style="font-size:25px">&#10094;</div>
-    <div class="w3-button w3-display-right w3-black" onclick="plusDivs(1)"  style="font-size:25px">&#10095;</div>
+    
 
    
     <!-- #Slider Ends -->

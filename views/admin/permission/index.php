@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Permission';
+$this->title = Yii::t('app', 'Permission');
 
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
@@ -11,7 +11,7 @@ use yii\helpers\ArrayHelper;
 <div class="grid-system">
 		<!---->	
 		<div class="grid-hor">
-			<h3 id="grid-example-basic">List <?= $this->title ?> on Website</h3>
+			<h3 id="grid-example-basic"><?= Yii::t('app', 'list') .' '. $this->title ?></h3>
 			<p class=""><?= $this->title ?></p>
 		</div>
 		<!---->
@@ -30,7 +30,7 @@ use yii\helpers\ArrayHelper;
 	            </form>
 	        </div>
 	        <div>
-	        	<a href="/admin/permission/c" class=" btn btn-primary" >Create new <i class="fa fa-pencil" aria-hidden="true"></i></a>	        	
+	        	<a href="/admin/permission/c" class=" btn btn-primary" ><?php echo Yii::t('app', 'Create new')?> <i class="fa fa-pencil" aria-hidden="true"></i></a>	        	
 	        </div>
 		</div>		
 		<!-- END SEARCH BOX -->
@@ -43,9 +43,9 @@ use yii\helpers\ArrayHelper;
 					<thead>
 						<tr>
 							<th style="color: red; width: 10%">ID</th>
-							<th style="color: red; width: 20%">Name</th>
-							<th style="color: red; width: 40%">Permission</th>																				
-							<th style="color: red; width: 30%">Action</th>							
+							<th style="color: red; width: 20%"><?= Yii::t('app', 'Name') ?></th>
+							<th style="color: red; width: 40%"><?= Yii::t('app', 'Permission');?></th>																				
+							<th style="color: red; width: 30%"><?= Yii::t('app', 'Action'); ?></th>							
 						</tr>
 					</thead>
 					<tbody>

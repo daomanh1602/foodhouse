@@ -10,39 +10,38 @@ use app\models\admin\Category;
 
 ?>
 
-<div class="testtbl-form">
+
 
     <?php $form = ActiveForm::begin(); ?>
+        <div class="col-md-12">
+            <?= $form->field($theForm, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($theForm, 'name')->textInput(['maxlength' => true]) ?>
+            <div class="form-group ">
+                <?= Html::label('Parent', 'parent',['class'=>'control-label'])?>
+                <?= Html::dropDownList(
+                    'Category[parentId]',
+                    $model->parentId,
+                    Category::getTree($model->id),
+                    ['prompt'=>	'Select parent ','class'=>'form-control-group']	
+                )?>
+            </div>
 
-	<div class="form-group ">
-		<?= Html::label('Parent', 'parent',['class'=>'control-label'])?>
-		<?= Html::dropDownList(
-			'Category[parentId]',
-			$model->parentId,
-			Category::getTree($model->id),
-			['prompt'=>	'Select parent ','class'=>'form-control-group']	
-		)?>
-	</div>
+            <?php $form->field($model, 'position')->textInput(['type'=>'number']) ?>
 
-    <?php $form->field($model, 'position')->textInput(['type'=>'number']) ?>
-
-	<?= $form->field($theForm, 'description')->textarea(['rows'=>5,'maxlength' => true]) ?>
-	
-	<?= $form->field($theForm, 'content')->textArea(['rows'=>15,'maxlength' => true])?>
-	
-	<?= $form->field($theForm, 'seo_title')->textInput(['maxlength' => true])?>
-	
-	<?= $form->field($theForm, 'seo_description')->textArea(['rows'=>5,'maxlength' => true])?>
-	
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
-
+            <?= $form->field($theForm, 'description')->textarea(['rows'=>5,'maxlength' => true]) ?>
+            
+            <?= $form->field($theForm, 'content')->textArea(['rows'=>15,'maxlength' => true])?>
+            
+            <?= $form->field($theForm, 'seo_title')->textInput(['maxlength' => true])?>
+            
+            <?= $form->field($theForm, 'seo_description')->textArea(['rows'=>5,'maxlength' => true])?>
+        
+        </div>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create new') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    
     <?php ActiveForm::end(); ?>
 
-</div>
+
 
 <?php
 $js = <<<'JS'

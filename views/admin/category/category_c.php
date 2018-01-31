@@ -1,14 +1,16 @@
 <?php
-$this->title = 'Category';
+$this->title = 'Create Category';
 Yii::$app->params['page_small_title'] = 'Create category';
 
 use app\models\admin\Category;
 
 ?>
 
-<div class="grid-form">
-	<div class="grid-form1">
-		<h3 id="forms-example" class="">Create Category</h3>
+	<div class="grid-system">
+		<div class="grid-hor">
+			<h3 id="grid-example-basic"><?php echo $this->title;?></h3>
+		</div>
+		<hr>
 		
 		<?= $this->render('_form', [
        		'model' => $model,

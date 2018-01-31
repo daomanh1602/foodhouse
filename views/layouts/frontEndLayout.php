@@ -40,7 +40,7 @@ Yii::$app->params['page_meta_title'] = Yii::$app->params['page_meta_title'] == '
     <link rel="stylesheet" href="/assets/front_end/slide.css">
 
     <style>
-        .mySlides {display:none}
+        .mySlides {display:none; margin-top: -15px}
         .w3-left, .w3-right, .w3-badge {cursor:pointer}
         .w3-badge {height:13px;width:13px;padding:0}
     </style>

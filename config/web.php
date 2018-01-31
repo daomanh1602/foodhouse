@@ -71,13 +71,19 @@ $config = [
 				'urlManager' => [ 						
 					'enablePrettyUrl' => true,
 					'showScriptName' => false,
+					// 'suffix' => '.html',
 					'rules'=>[
 						'' => 'home/index',
-						'admin' => 'admin/login',
-						'admin/post.html' => 'admin/post/index', 	
+						'admin/login.html' => '/admin/login',
+						
 					],					
 				] ,
-				'user'=>  $params['components.user'],
+				'user'=> [
+					'identityClass' => 'app\models\admin\UserModel',
+					'enableAutoLogin' => false ,
+					'authTimeout'=>3600,
+					'loginUrl'=>['admin/login'],
+				],
 		],
 		'modules' => [
 				'gridview' => [

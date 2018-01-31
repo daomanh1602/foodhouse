@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
 			<?=$form->field($model, 'username'); ?>
 		</div>
 		<div class="col-md-12">
-			<?=$form->field($model, 'password'); ?>
+			<?=$form->field($model, 'password')->passwordInput(); ?>
 		</div>
 				<div class="text-right">
 		<div class="text-right"><?= Html::submitButton('Sign In'); ?></div>	

@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Post';
+$this->title = Yii::t('app', 'Post');
 
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
@@ -11,8 +11,8 @@ use yii\helpers\ArrayHelper;
 <div class="grid-system">
 		<!---->	
 		<div class="grid-hor">
-			<h3 id="grid-example-basic">List Post on Website</h3>
-			<p class="">Post</p>
+			<h3 id="grid-example-basic"><?= Yii::t('app', 'list') .' '. $this->title ?></h3>
+			<p class=""><?=Yii::t('app', 'Post')?></p>
 		</div>
 		<!---->
 		
@@ -30,7 +30,7 @@ use yii\helpers\ArrayHelper;
 	            </form>
 	        </div>
 	        <div>
-	        	<a href="/admin/post/c" class=" btn btn-primary">Create new <i class="fa fa-pencil" aria-hidden="true"></i></a>	        	
+	        	<a href="/admin/post/c" class=" btn btn-primary"><?php echo Yii::t('app', 'Create new')?><i class="fa fa-pencil" aria-hidden="true"></i></a>	        	
 	        </div>
 		</div>		
 		<!-- END SEARCH BOX -->
@@ -43,11 +43,11 @@ use yii\helpers\ArrayHelper;
 					<thead>
 						<tr>
 							<th style="color: red; width: 10%">ID</th>
-							<th style="color: red; width: 20%">Title</th>
-							<th style="color: red; width: 25%">Category name</th>
-							<th style="color: red; width: 20%">Created at</th>
-							<th style="color: red; width: 20%">Created by</th>														
-							<th style="color: red; width: 5%">Action</th>							
+							<th style="color: red; width: 20%"><?= Yii::t('app', 'Title'); ?></th>
+							<th style="color: red; width: 25%"><?= Yii::t('app', 'Category name'); ?></th>
+							<th style="color: red; width: 20%"><?= Yii::t('app', 'Created at'); ?></th>
+							<th style="color: red; width: 20%"><?= Yii::t('app', 'Created by'); ?></th>														
+							<th style="color: red; width: 5%"><?= Yii::t('app', 'Action'); ?></th>							
 						</tr>
 					</thead>
 					<tbody>

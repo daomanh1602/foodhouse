@@ -30,7 +30,7 @@ use yii\helpers\ArrayHelper;
 	            </form>
 	        </div>
 	        <div>
-	        	<a href="/admin/category/c" class=" btn btn-primary">Create new <i class="fa fa-pencil" aria-hidden="true"></i></a>	        	
+	        	<a href="/admin/category/c" class=" btn btn-primary"><?php echo Yii::t('app', 'Create new')?> <i class="fa fa-pencil" aria-hidden="true"></i></a>	        	
 	        </div>
 		</div>		
 		<!-- END SEARCH BOX -->
@@ -43,11 +43,11 @@ use yii\helpers\ArrayHelper;
 					<thead>
 						<tr>
 							<th style="color: red; width: 10%">ID</th>
-							<th style="color: red; width: 25%">Title</th>
-							<th style="color: red; width: 15%">Move</th>
-							<th style="color: red; width: 20%">Created at</th>
-							<th style="color: red; width: 20%">Created by</th>														
-							<th style="color: red; width: 10%">Action</th>							
+							<th style="color: red; width: 25%"><?= Yii::t('app', 'Title'); ?></th>
+							<th style="color: red; width: 15%"><?= Yii::t('app', 'Move'); ?></th>
+							<th style="color: red; width: 20%"><?= Yii::t('app', 'Created at'); ?></th>
+							<th style="color: red; width: 20%"><?= Yii::t('app', 'Created by'); ?></th>														
+							<th style="color: red; width: 10%"><?= Yii::t('app', 'Action'); ?></th>							
 						</tr>
 					</thead>
 					<tbody>
@@ -59,7 +59,7 @@ use yii\helpers\ArrayHelper;
       							<a title="<?=Yii::t('app', 'move')?>" class="text-muted" href="/admin/category/moveup?id=<?=$v['id']?>"><i class="fa fa-arrow-up "></i></a> | 
       							<a title="<?=Yii::t('app', 'move')?>" class="text-muted" href="/admin/category/movedown?id=<?=$v['id']?>"><i class="fa fa-arrow-down"></i></a>
      						</td>
-							<td><?= $v['created_at']?></td>																	
+							<td><?= date("Y-m-d", $v['created_at']); ?></td>																	
 							<td><?= $v['user_created']['username']?></td>																						
 							<td><a href="/admin/category/u?id=<?= $v['id'];?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> | <a href="/admin/category/d?id=<?= $v['id'];?>"><i class="fa fa-trash-o fa-2" aria-hidden="true"></i></a> </td>
 						</tr>						

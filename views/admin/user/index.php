@@ -1,5 +1,5 @@
 <?php
-$this->title = 'User';
+$this->title = Yii::t('app', 'Account');
 
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
@@ -11,8 +11,8 @@ use yii\helpers\ArrayHelper;
 <div class="grid-system">
 		<!---->	
 		<div class="grid-hor">
-			<h3 id="grid-example-basic"><?php echo Yii::t('appuser', 'list account')?></h3>
-			<p class=""><?php echo Yii::t('appuser', 'account');?></p>
+			<h3 id="grid-example-basic"><?= Yii::t('app', 'list') .' '. $this->title ?></h3>
+			<p class=""><?php echo Yii::t('app', 'account');?></p>
 		</div>
 		<!---->
 		
@@ -29,7 +29,7 @@ use yii\helpers\ArrayHelper;
 	            </form>
 	        </div>
 	        <div>
-	        	<a href="/admin/user/c" class=" btn btn-primary"><?php echo Yii::t('appuser', 'Create new')?> <i class="fa fa-pencil" aria-hidden="true"></i></a>	        	
+	        	<a href="/admin/user/c" class=" btn btn-primary"><?php echo Yii::t('app', 'Create new')?> <i class="fa fa-pencil" aria-hidden="true"></i></a>	        	
 	        </div>
 		</div>		
 		<!-- END SEARCH BOX -->
@@ -42,11 +42,11 @@ use yii\helpers\ArrayHelper;
 					<thead>
 						<tr>
 							<th style="color: red; width: 10%">ID</th>
-							<th style="color: red; width: 20%"><?php echo Yii::t('appuser', 'f_name')?></th>
-							<th style="color: red; width: 20%"><?php echo Yii::t('appuser', 'l_name')?></th>
-							<th style="color: red; width: 20%"><?php echo Yii::t('appuser', 'u_name')?></th>							
-							<th style="color: red; width: 20%">Email</th>
-							<th style="color: red; width: 10%"><?php echo Yii::t('appuser', 'action')?></th>							
+							<th style="color: red; width: 20%"><?php echo Yii::t('app', 'f_name')?></th>
+							<th style="color: red; width: 20%"><?php echo Yii::t('app', 'l_name')?></th>
+							<th style="color: red; width: 20%"><?php echo Yii::t('app', 'u_name')?></th>							
+							<th style="color: red; width: 20%">Email</th>													
+							<th style="color: red; width: 10%"><?= Yii::t('app', 'Action')  ?></th>									
 						</tr>
 					</thead>
 					<tbody>

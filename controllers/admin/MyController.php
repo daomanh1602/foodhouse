@@ -46,8 +46,8 @@ class MyController extends Controller
 				
 				if (!defined('MY_ID')) {
 					if (Yii::$app->user->isGuest) {
-						define('MY_ID', 0);
-// 						exit();						
+						define('MY_ID', 0);			
+						// exit();						
 					} else {
 						define('MY_ID', Yii::$app->user->identity->id);
 					}

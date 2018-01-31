@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Slide';
+$this->title = Yii::t('app', 'Slide');
 
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
@@ -20,8 +20,8 @@ $list_id = rtrim($list_id, ',');
 <div class="grid-system">
 		<!---->	
 		<div class="grid-hor">
-			<h3 id="grid-example-basic">List Slide on Website</h3>
-			<p class="">Slide</p>
+			<h3 id="grid-example-basic"><?= Yii::t('app', 'list') .' '. $this->title ?></h3>
+			<p class=""><?= Yii::t('app', 'List Slide '); ?> </p>
 		</div>
 		<!---->
 		
@@ -52,8 +52,8 @@ $list_id = rtrim($list_id, ',');
 	        </div>
 			
 	        <div>
-	        	<a href="/admin/slide/c" class=" btn btn-primary">Create new <i class="fa fa-pencil" aria-hidden="true"></i></a>	 
-				<a href="" class="btn btn-primary hide" id="update_use">Update</a>       	
+	        	<a href="/admin/slide/c" class=" btn btn-primary"><?php echo Yii::t('app', 'Create new')?> <i class="fa fa-pencil" aria-hidden="true"></i></a>	 
+				<a href="" class="btn btn-primary hide" id="update_use"><?php echo Yii::t('app', 'Update')?></a>       	
                 <?= Html::textInput('id_edit', $list_id, ['class'=>'form-control hide change_id']) ?>                   
 	        </div>
 		</div>		
@@ -68,13 +68,13 @@ $list_id = rtrim($list_id, ',');
 					<thead>
 						<tr>
 							<th style="color: red; width: 10%">ID</th>
-							<th style="color: red; width: 15%">Title</th>
-							<th style="color: red; width: 10%">Type</th>
-							<th style="color: red; width: 10%">Move</th>
-							<th style="color: red; width: 5%">Use</th>
-							<th style="color: red; width: 20%">Created at</th>
-							<th style="color: red; width: 20%">Created by</th>														
-							<th style="color: red; width: 10%">Action</th>							
+							<th style="color: red; width: 15%"><?= Yii::t('app', 'Title'); ?></th>
+							<th style="color: red; width: 10%"><?= Yii::t('app', 'Type'); ?></th>
+							<th style="color: red; width: 10%"><?= Yii::t('app', 'Move'); ?></th>
+							<th style="color: red; width: 5%"><?= Yii::t('app', 'Use'); ?></th>
+							<th style="color: red; width: 20%"><?= Yii::t('app', 'Created at'); ?></th>
+							<th style="color: red; width: 20%"><?= Yii::t('app', 'Created by'); ?></th>														
+							<th style="color: red; width: 10%"><?= Yii::t('app', 'Action'); ?></th>							
 						</tr>
 					</thead>
 					<tbody>
@@ -90,7 +90,7 @@ $list_id = rtrim($list_id, ',');
 							<td>
 								<input type="checkbox" name="check_box" value="<?= $v['use_slide']?>" class="check_id" id="check_id_<?= $v['id'] ?>" <?= $v['use_slide'] == '1' ? 'checked' : '' ?> >				
 							</td> 
-							<td><?= $v['created_at']?></td>																	
+							<td><?= date("Y-m-d", $v['created_at']); ?></td>																	
 							<td><?= $v['user_created']['username']?></td>																						
 							<td><a href="/admin/slide/u?id=<?= $v['id'];?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> | <a href="/admin/slide/d?id=<?= $v['id'];?>"><i class="fa fa-trash-o fa-2" aria-hidden="true"></i></a> </td>
 						</tr>						
