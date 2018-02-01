@@ -69,10 +69,10 @@ $list_id = rtrim($list_id, ',');
 						<tr>
 							<th style="color: red; width: 10%">ID</th>
 							<th style="color: red; width: 15%"><?= Yii::t('app', 'Title'); ?></th>
-							<th style="color: red; width: 10%"><?= Yii::t('app', 'Type'); ?></th>
+							<th style="color: red; width: 10%"><?= Yii::t('app', 'r_type'); ?></th>
 							<th style="color: red; width: 10%"><?= Yii::t('app', 'Move'); ?></th>
-							<th style="color: red; width: 5%"><?= Yii::t('app', 'Use'); ?></th>
-							<th style="color: red; width: 20%"><?= Yii::t('app', 'Created at'); ?></th>
+							<th style="color: red; width: 10%"><?= Yii::t('app', 'Use'); ?></th>
+							<th style="color: red; width: 15%"><?= Yii::t('app', 'Created at'); ?></th>
 							<th style="color: red; width: 20%"><?= Yii::t('app', 'Created by'); ?></th>														
 							<th style="color: red; width: 10%"><?= Yii::t('app', 'Action'); ?></th>							
 						</tr>

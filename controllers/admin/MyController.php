@@ -15,15 +15,15 @@ class MyController extends Controller
 		//\yii\base\Event::on(\yii\web\View::className(), \yii\web\View::EVENT_AFTER_RENDER,  [$this, 'handlerViewEvent']);
 		
 		// Active Language
-// 		if (Yii::$app->user->isGuest) {
-// 			$activeLanguage = Yii::$app->session->get('active_language', 'en');
-// 		} else {
-// 			$activeLanguage = Yii::$app->user->identity->language;
-// 		}
-// 		if (!in_array($activeLanguage, Yii::$app->params['active_languages'])) {
-// 			$activeLanguage = Yii::$app->params['active_languages'][0];
-// 		}
-// 		Yii::$app->language = $activeLanguage;
+		if (Yii::$app->user->isGuest) {
+			$activeLanguage = Yii::$app->session->get('active_language', 'en');
+		} else {
+			$activeLanguage = Yii::$app->user->identity->language;
+		}
+		if (!in_array($activeLanguage, Yii::$app->params['active_languages'])) {
+			$activeLanguage = Yii::$app->params['active_languages'][0];
+		}
+		Yii::$app->language = $activeLanguage;
 		
 		// Mobile device
 		

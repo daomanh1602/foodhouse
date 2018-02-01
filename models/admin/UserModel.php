@@ -59,7 +59,8 @@ class UserModel extends ActiveRecord  implements IdentityInterface
 				[['username','password','permission_id','address'], 'required'],
 				[['emails'], 'email'],
 				[['username','emails'], 'unique'],
-				[['username','password','first_name','last_name'], 'string', 'max' => 250],				
+				[['username','password','first_name','last_name'], 'string', 'max' => 250],			
+				[['avatar'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],					
 		];
 	}
 	
@@ -128,6 +129,16 @@ class UserModel extends ActiveRecord  implements IdentityInterface
 	
 	public function validatePassword($password) {
 		return $this->password ===  md5($password);
+	}
+
+	public function upload()
+	{
+		if ($this->validate()) {			
+			$this->avatar->saveAs('upload/user/' . $this->avatar->baseName . '.' . $this->avatar->extension);
+			return true;
+		} else {
+			return false;
+		}
 	}
   
 }

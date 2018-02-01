@@ -11,10 +11,10 @@ class DefaultController extends MyController
             if (Yii::$app->user->isGuest) {
                 Yii::$app->session->set('active_language', $lang);
             } else {
-                Yii::$app->session->set('active_language', $lang);
-                //Yii::$app->db->createCommand()->update('users', ['language'=>$lang], ['id'=>MY_ID])->execute();
+                // Yii::$app->session->set('active_language', $lang);
+                Yii::$app->db->createCommand()->update('nobi_user', ['language'=>$lang], ['id'=>MY_ID])->execute();                
             }
-            Yii::$app->session->set('active_language', $lang);
+           Yii::$app->session->set('active_language', $lang);           
         }
         $return = Yii::$app->request->getReferrer();
         if (!isset($return)) {

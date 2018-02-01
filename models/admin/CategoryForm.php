@@ -25,15 +25,15 @@ class CategoryForm extends Model
 	{
 		return [
 			'name'=> Yii::t('app', 'Name'),
-			'description'=> Yii::t('app', 'Description'),
-			'content'=> Yii::t('app', 'Content'),
+			'description'=> Yii::t('app', 'description'),
+			'content'=> Yii::t('app', 'Content'),	
 			'slug'=> Yii::t('app', 'Slug'),
 			'seo_title'=> Yii::t('app', 'Seo title'),
 			'seo_description' => Yii::t('app', 'Seo Description'),	
-			'avatar' => Yii::t('app','Avatar'),
-			'status' => Yii::t('app', 'Status'),
-			'use' => Yii::t('app', 'Use'),
-			'type' => Yii::t('app', 'Type'),
+			'avatar' => Yii::t('app','avatar'),
+			'status' => Yii::t('app', 'status'),
+			'use' => Yii::t('app', 'Used'),
+			'type' => Yii::t('app', 'r_type'),
 		];
 	}
 	public function rules()

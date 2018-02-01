@@ -17,7 +17,7 @@ use app\models\admin\Category;
             <?= $form->field($theForm, 'name')->textInput(['maxlength' => true]) ?>
 
             <div class="form-group ">
-                <?= Html::label('Parent', 'parent',['class'=>'control-label'])?>
+                <?= Html::label(Yii::t('app','parent_id_category'), 'parent',['class'=>'control-label'])?>
                 <?= Html::dropDownList(
                     'Category[parentId]',
                     $model->parentId,
@@ -37,8 +37,9 @@ use app\models\admin\Category;
             <?= $form->field($theForm, 'seo_description')->textArea(['rows'=>5,'maxlength' => true])?>
         
         </div>
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create new') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    
+        <div class="text-right">
+            <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create new') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        </div>
     <?php ActiveForm::end(); ?>
 
 

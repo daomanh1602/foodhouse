@@ -13,7 +13,6 @@ use yii\widgets\Breadcrumbs;
 // use app\assets\AppAsset;
 
 // AppAsset::register($this);
-
 $this->beginPage();
 ?>
 <!--
@@ -54,7 +53,7 @@ License URL: bienngoc.com
     
     <body>
         <?php $this->beginBody() ?>
-            <div id="wrapper">
+        <div id="wrapper">
 
         <nav class="navbar-default navbar-static-top" role="navigation">
             <div class="navbar-header">
@@ -65,7 +64,7 @@ License URL: bienngoc.com
                         class="icon-bar"></span>
                 </button>
                 <h1>
-                    <a class="navbar-brand" href="index.html">Minimal</a>
+                    <a class="navbar-brand" href="/admin/category">Minimal</a>
                 </h1>
             </div>
             <div class=" border-bottom">
@@ -85,7 +84,6 @@ License URL: bienngoc.com
                 
                 <div class="drop-men">
                     <ul class=" nav_1">
-
                         <li class="dropdown at-drop"><a href="#"
                             class="dropdown-toggle dropdown-at " data-toggle="dropdown"><i
                                 class="fa fa-globe"></i> <span class="number">5</span></a>
@@ -151,7 +149,7 @@ License URL: bienngoc.com
                         <li class="dropdown"><a href="#"
                             class="dropdown-toggle dropdown-at" data-toggle="dropdown"><span
                                 class=" name-caret"><?= Yii::$app->user->identity->username?><i class="caret"></i></span><img
-                                src="images/wo.jpg"></a>
+                                src="<?= '/'. Yii::$app->user->identity->avatar ?>" style="width: 40px; height:40px"></a>
                             <ul class="dropdown-menu " role="menu">
                                 <li><a href="profile.html"><i class="fa fa-user"></i>Edit
                                         Profile</a></li>
@@ -168,7 +166,7 @@ License URL: bienngoc.com
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
 
-                            <p style="text-align: center;" class="hide">
+                            <p style="text-align: center;" class="">
                                 <a style="display: inline" class="btn-vi" href="/select/lang/vi"><img alt="vietnamese" src="/admin_layout/images/icon/icon_vn.svg" style="width: 30px; height: 50px"></a> | <a href="/select/lang/en" class="btn-en" style="display: inline"><img alt="english" src="/admin_layout/images/icon/icon_en.svg" style="width: 25px; height: 50px"></a>
                             </p>
                             
@@ -181,19 +179,19 @@ License URL: bienngoc.com
                             <li>
                                 <a href="#" class=" hvr-bounce-to-right">
                                     <i class="fa fa-indent nav_icon"></i> 
-                                    <span class="nav-label">Danh Muc</span>
+                                    <span class="nav-label"><?= Yii::t('app','category'); ?></span>
                                     <span class="fa arrow"></span>
                                 </a>
                                 
                                 <ul class="nav nav-second-level">
                                     <li>
                                         <a href="/admin/category" class=" hvr-bounce-to-right"> 
-                                            <i class="fa fa-area-chart nav_icon"></i> - Danh sách danh mục
+                                            <i class="fa fa-area-chart nav_icon"></i> - <?= Yii::t('app','list').' '. Yii::t('app','category'); ?>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="/admin/category/c" class=" hvr-bounce-to-right">
-                                            <i class="fa fa-map-marker nav_icon"></i> - Thêm danh mục 
+                                            <i class="fa fa-map-marker nav_icon"></i> - <?= Yii::t('app','add').' '. Yii::t('app','category'); ?>
                                         </a>
                                     </li>									
                                 </ul>
@@ -202,19 +200,19 @@ License URL: bienngoc.com
                             <li>
                                 <a href="#" class=" hvr-bounce-to-right">
                                     <i class="fa fa-indent nav_icon"></i> 
-                                    <span class="nav-label">Bai viet</span>
+                                    <span class="nav-label"><?= Yii::t('app','post'); ?></span>
                                     <span class="fa arrow"></span>
                                 </a>
                                 
                                 <ul class="nav nav-second-level">
                                     <li>
                                         <a href="/admin/post" class=" hvr-bounce-to-right"> 
-                                            <i class="fa fa-area-chart nav_icon"></i> - Danh sách bài viết
+                                            <i class="fa fa-area-chart nav_icon"></i> - <?= Yii::t('app','list').' '. Yii::t('app','post'); ?>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="/admin/post/c" class=" hvr-bounce-to-right">
-                                            <i class="fa fa-map-marker nav_icon"></i> - Thêm bài viết
+                                            <i class="fa fa-map-marker nav_icon"></i> - <?= Yii::t('app','add').' '. Yii::t('app','post'); ?>
                                         </a>
                                     </li>									
                                 </ul>
@@ -230,12 +228,12 @@ License URL: bienngoc.com
                                 <ul class="nav nav-second-level">
                                     <li>
                                         <a href="/admin/slide" class=" hvr-bounce-to-right"> 
-                                            <i class="fa fa-area-chart nav_icon"></i> - Danh sách Slide
+                                            <i class="fa fa-area-chart nav_icon"></i> - <?= Yii::t('app','list').' slide'; ?>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="/admin/slide/c" class=" hvr-bounce-to-right">
-                                            <i class="fa fa-map-marker nav_icon"></i> - Thêm Slide
+                                            <i class="fa fa-map-marker nav_icon"></i> - <?= Yii::t('app','add').' slide'; ?>
                                         </a>
                                     </li>									
                                 </ul>
@@ -251,12 +249,12 @@ License URL: bienngoc.com
                                 <ul class="nav nav-second-level">
                                     <li>
                                         <a href="/admin/menu" class=" hvr-bounce-to-right"> 
-                                            <i class="fa fa-area-chart nav_icon"></i> - Danh sách Menu
+                                            <i class="fa fa-area-chart nav_icon"></i> - <?= Yii::t('app','list').' menu'; ?>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="/admin/menu/c" class=" hvr-bounce-to-right">
-                                            <i class="fa fa-map-marker nav_icon"></i> - Thêm Menu
+                                            <i class="fa fa-map-marker nav_icon"></i> - <?= Yii::t('app','add').' menu'; ?>
                                         </a>
                                     </li>									
                                 </ul>
@@ -265,19 +263,19 @@ License URL: bienngoc.com
                             <li>
                                 <a href="#" class=" hvr-bounce-to-right">
                                     <i class="fa fa-indent nav_icon"></i> 
-                                    <span class="nav-label">Tai khoan</span>
+                                    <span class="nav-label"><?= Yii::t('app','user'); ?></span>
                                     <span class="fa arrow"></span>
                                 </a>
                                 
                                 <ul class="nav nav-second-level">
                                     <li>
                                         <a href="/admin/user" class=" hvr-bounce-to-right"> 
-                                            <i class="fa fa-area-chart nav_icon"></i>Danh sách tai khoan
+                                            <i class="fa fa-area-chart nav_icon"></i> - <?= Yii::t('app','list').' '. Yii::t('app','user'); ?>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="/admin/user/c" class=" hvr-bounce-to-right">
-                                            <i class="fa fa-map-marker nav_icon"></i>Tạo tài quản quản lý
+                                            <i class="fa fa-map-marker nav_icon"></i>- <?= Yii::t('app','add').' '. Yii::t('app','user'); ?>
                                         </a>
                                     </li>									
                                 </ul>

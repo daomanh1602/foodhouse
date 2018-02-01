@@ -2,14 +2,21 @@
 return [
 	//phan chung 
 	'Create new' => 'Tạo mới',
-	'update' => 'Cập nhật thông tin',
+	'Update' => 'Cập nhật thông tin',
 	'delete' => 'Xóa',
-	'action' => 'Hành động',
 	'submit' => 'Lưu',	
 	'status' => 'Trang thai',
 	
 	'avatar' => 'Ảnh đại diện',	
 	'description' => 'Mô tả',	
+	'Content' => 'Nội dung',
+	'Seo title' => 'Tiêu đề cho SEO',
+	'Seo Description' => 'Mô tả cho SEO',
+
+
+	'add' => 'Thêm',
+	'list' => 'Danh sách',
+
 	//Account
 	'user'=>'Người dùng',
 	'account' => 'Tài khoản đang hoạt động',
@@ -26,4 +33,16 @@ return [
 	'parent_id_category' => 'Danh mục cha',
 	'level_category' => 'level',
 	'r_type' => 'Loại',	
+	
+	'Title' => 'Tiêu đề',
+	'Move' => 'Di chuyển',
+	'Created at' => 'Ngày tạo',
+	'Created by' => 'Người tạo',
+	'Action' => 'Lựa chọn',
+	'Name' => 'Tên loại',
+	'Use'=> 'Sử dụng',
+
+	'category' => 'Danh mục',	
+	'post' => 'Bài viết',
+	
 ];

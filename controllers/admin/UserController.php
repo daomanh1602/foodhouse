@@ -7,6 +7,7 @@ use app\models\admin\UserModel;
 use app\models\admin\PermissionModel;
 use yii\web\HttpException;
 use yii\data\Pagination;
+use yii\web\UploadedFile;
 
 class UserController extends MyController {
     public function actionIndex() {
@@ -46,13 +47,16 @@ class UserController extends MyController {
             $theUser->created_by = USER_ID;
             $theUser->updated_at = NOW;
             $theUser->updated_by = USER_ID;
-            // $theUser->status_acc = 1;
-            // $theUser->username = $theUser->username;
-            // $theUser->f_name = $theUser->f_name;
-            // $theUser->l_name = $theUser->l_name;
-            // $theUser->emails = $theUser->emails;
-            // $theUser->gender = $theUser->gender;
+
             $theUser->password = md5 ( $theUser->password ) . 'n0b1';
+
+            $theUser->avatar = UploadedFile::getInstance($theUser, 'avatar');
+            // var_Dump($model);exit();
+            if ($theUser->upload()) {
+                $theUser->avatar = 'upload/user/'.$theUser->avatar->name;
+            }else{
+                exit();
+            }
             
             $result = $theUser->save ( false );
             

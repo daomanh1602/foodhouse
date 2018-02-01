@@ -11,7 +11,7 @@ $config = [
 		'basePath' => dirname ( __DIR__ ),
 		'bootstrap' => ['log'],
 		'extensions' => require(__DIR__ . '/../vendor/yiisoft/extensions.php'),		
-		'language' => 'vi',
+		// 'language' => 'vi',
 		'aliases'=>[
 			'@www'=>'http://localhost/foodhouse/web',
 		],
@@ -75,7 +75,7 @@ $config = [
 					'rules'=>[
 						'' => 'home/index',
 						'admin/login.html' => '/admin/login',
-						
+						'select/lang/<lang>'=>'/admin/default/select-lang',
 					],					
 				] ,
 				'user'=> [
